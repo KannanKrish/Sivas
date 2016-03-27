@@ -19,7 +19,7 @@ namespace Sivas.Models
     }
     public enum ProductCategory
     {
-        Firdge,Wood
+        Firdge,Wood,AC
     }
     public enum ProductEnergyStar
     {
