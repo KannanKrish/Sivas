@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Sivas.Models.Products>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Landscape)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Model)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnergyStar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specification)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @{
+                    var message = item.Category + " " + item.Model;
+                }
+                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" alt="@message" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Landscape)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnergyStar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @{
+                    var displaySpecification = "<ul><li>";
+                    if (item.Specification.Contains("~"))
+                    {
+                        displaySpecification += item.Specification.Replace("~", "</li><li>");
+                    }
+                    else
+                    {
+                        displaySpecification += item.Specification;
+                    }
+                    displaySpecification += "</li></ul>";
+                    item.Specification = displaySpecification;
+                }
+                @Html.Raw(Server.HtmlDecode(item.Specification))
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+                    }
+
+</table>
