@@ -2,84 +2,37 @@
 
 @{
     ViewBag.Title = "Details";
+
+}
+@section styles{
+    @if (Model.Landscape == true)
+    {
+        <link href = "/Sivas/Content/customLand.css" rel = "stylesheet" />
+    }
+    else
+    {
+        <link href = "/Sivas/Content/customPort.css" rel = "stylesheet" />
+    }
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Products</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-
-        <dt>
-            @*@Html.DisplayNameFor(model => model.Image)*@
+<div class="ProductContainer">
+    <div class="product">
+        <div class="product_Image">
             @{
                 var message = Model.Category + " " + Model.Model;
             }
-            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" alt="@message" />
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Landscape)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Landscape)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EnergyStar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EnergyStar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Specification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Specification)
-        </dd>
-
-    </dl>
+            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" class="product_Image" alt="@message" />
+        </div>
+        <div class="product_Description">
+            <span class="Brand">@Html.DisplayFor(model => model.Category)</span>
+            <span class="Model">@Html.DisplayFor(model => model.Brand)</span>
+            <span class="EneryStar">@Html.DisplayFor(model => model.EnergyStar)</span>
+            <span class="Color">@Html.DisplayFor(model => model.Color)</span>
+            <span class="Specification">@Html.DisplayFor(model => model.Specification)</span>
+        </div>
+    </div>
 </div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

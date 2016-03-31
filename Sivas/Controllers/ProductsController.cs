@@ -85,7 +85,9 @@ namespace Sivas.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(products).State = EntityState.Modified;
+                HttpPostedFileBase file = Request.Files["ImageData"];
+                products.Image = ReuseCode.ConvertToBytes(file);
+                db.Entry(products).State = EntityState.Modified;                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
