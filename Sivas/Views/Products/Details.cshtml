@@ -17,13 +17,13 @@
 
 <div class="ProductContainer">
     <div class="product">
-        <div class="product_Image">
+        <div @(Model.Landscape==true?"class=product_ImageLand":"class=product_ImagePort")>
             @{
                 var message = Model.Category + " " + Model.Model;
             }
-            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" class="product_Image" alt="@message" />
+            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" @(Model.Landscape==true?"class=product_ImageLand":"class=product_ImagePort") alt="@message" />
         </div>
-        <div class="product_Description">
+        <div @(Model.Landscape==true? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
             <span class="Brand">@Html.DisplayFor(model => model.Category)</span>
             <span class="Model">@Html.DisplayFor(model => model.Brand)</span>
             <span class="EneryStar">@Html.DisplayFor(model => model.EnergyStar)</span>
