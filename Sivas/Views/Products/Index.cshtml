@@ -14,10 +14,11 @@
             < link href = "~/Content/customPort.css" rel = "stylesheet" />
         }*@
     <link href="~/Content/customLand.css" rel="stylesheet" />
+    <link href="~/Content/customPort.css" rel="stylesheet" />
 }
 <script type="text/javascript">
     function GoToRoom(id) {
-        window.location = "/Sivas/Products/Details?id=" + id;                
+        window.location = "/Sivas/Products/Details?id=" + id;
     }
 </script>
 
@@ -26,13 +27,13 @@
     @foreach (var item in Model)
     {
         <div class="product" @("onclick=GoToRoom('" + item.Id + "')")>
-            <div class="product_Image">
+            <div @(item.Landscape==true?"class=product_ImageLand":"class=product_ImagePort")>
                 @{
                     var message = item.Category + " " + item.Model;
                 }
-                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" class="product_Image" alt="@message" />
+                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape==true?"class=product_ImageLand":"class=product_ImagePort") alt="@message" />
             </div>
-            <div class="product_Description">
+            <div @(item.Landscape==true? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
                 <span class="Brand">@Html.DisplayFor(model => item.Category)</span>
                 <span class="Model">@Html.DisplayFor(model => item.Brand)</span>
                 <span class="EneryStar">@Html.DisplayFor(model => item.EnergyStar)</span>
@@ -52,7 +53,7 @@
                         item.Specification = displaySpecification;
                     }
                     @Html.Raw(Server.HtmlDecode(item.Specification))
-                </span>                
+                </span>
             </div>
         </div>
                         }

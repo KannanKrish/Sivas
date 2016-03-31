@@ -13,10 +13,10 @@
 }
 
     .product:hover {
-        cursor:pointer;
+        cursor: pointer;
     }
 
-.product_Image {
+.product_ImageLand {
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -24,38 +24,44 @@
     width: 240px;
 }
 
-.product_Description {
+.product_DescriptionLand {
     display: compact;
     margin-top: 5px;
     margin-left: 20px;
 }
 
-    .product_Description .Brand {
-        font-size: larger;                
+    .product_DescriptionLand .Brand {
+        font-size: larger;
         text-align: center;
         display: block;
     }
 
-    .product_Description .Model {
+    .product_DescriptionLand .Model {
         display: block;
     }
 
-    .product_Description .EneryStar {
+    .product_DescriptionLand .EneryStar {
         display: block;
     }
 
-    .product_Description .Color {
+    .product_DescriptionLand .Color {
         display: block;
     }
 
-    .product_Description .Specification {
+    .product_DescriptionLand .Specification {
         display: block;
     }
 
-        .product_Description .Specification ul {
-            margin-left:-25px;            
+        .product_DescriptionLand .Specification ul {
+            margin-left: -40px;
+            list-style: none;
         }
 
-            .product_Description .Specification ul li {
-                display:inline; 
+            .product_DescriptionLand .Specification ul li {
+                display: inline;
+                background: url(../image/bullet.png) no-repeat;
+                padding-left: 30px;
+                padding-right: 10px;
+                background-position-x: 0;
+                background-position-y: -6px;
             }
