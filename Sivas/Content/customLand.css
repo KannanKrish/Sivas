@@ -18,10 +18,12 @@
 
 .product_ImageLand {
     display: block;
+    position: relative;
     margin-right: auto;
     margin-left: auto;
     height: 100px;
     width: 240px;
+    z-index: 1;
 }
 
 .product_DescriptionLand {
@@ -33,35 +35,39 @@
     .product_DescriptionLand .Category {
         font-size: larger;
         text-align: center;
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .Company {
         font-size: larger;
         text-align: center;
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .Brand {
         font-size: larger;
         text-align: center;
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .Model {
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .Image {
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .Landscape {
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .EneryStar {
         display: block;
+        position: relative;
+        float: right;
+        top: -65px;
+        left: -2px;
     }
 
     .product_DescriptionLand .Price {
@@ -70,6 +76,11 @@
 
     .product_DescriptionLand .Offer {
         display: block;
+        position: relative;
+        float: right;
+        top: -145px;
+        left: -125px;
+        z-index: 2;
     }
 
     .product_DescriptionLand .Color {
@@ -78,6 +89,8 @@
 
     .product_DescriptionLand .Specification {
         display: block;
+        position:relative;
+        top:-60px;
     }
 
         .product_DescriptionLand .Specification ul {
@@ -90,10 +103,40 @@
                 background: url(../image/bullet.png) no-repeat;
                 padding-left: 30px;
                 padding-right: 10px;
+                position: relative;
+                top: -10px;
                 background-position-x: 0;
                 background-position-y: -6px;
             }
 
     .product_DescriptionLand .Description {
         display: block;
+        position: relative;
+        top: -80px;
+    }
+
+.Overlap {
+    position: absolute;
+    opacity: 0;
+    background-color: #F53F42;
+    height: 240px;
+    width: 300px;
+    -webkit-transition: opacity 1s linear 0.1s;
+    -o-transition: opacity 1s linear 0.1s;
+    transition: opacity 1s linear 0.1s;
+}
+
+    .Overlap:hover {
+        -webkit-opacity: 0.9;
+        opacity: 0.9;
+        z-index: 3;
+    }
+
+    .Overlap .Text {
+        font-size: xx-large;
+        display: block;
+        text-align: center;
+        position: relative;
+        top: 50%;
+        color: #FFFFFF;
     }

@@ -28,10 +28,38 @@
             <span class="Brand">@Html.DisplayFor(model => model.Brand)</span>
             <span class="Model">@Html.DisplayFor(model => model.Model)</span>
             @*<span class="Image">@Html.DisplayFor(model => model.Image)</span>*@
-            @*<span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>*@
-            <span class="EneryStar">@Html.DisplayFor(model => model.EnergyStar)</span>
+            <span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>
+            <span class="EneryStar">
+                @{
+                    if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
+                    {
+                        <img src="~/image/EnergyStarLand/FiveStar.png" />
+                    }
+                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
+                    {
+                        <img src="~/image/EnergyStarLand/FourStar.png" />
+                    }
+                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
+                    {
+                        <img src="~/image/EnergyStarLand/ThreeStar.png" />
+                    }
+                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
+                    {
+                        <img src="~/image/EnergyStarLand/TwoStar.png" />
+                    }
+                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.One)
+                    {
+                        <img src="~/image/EnergyStarLand/OneStar.png" />
+                    }
+                }
+            </span>
             <span class="Price">@Html.DisplayFor(model => model.Price)</span>
-            @*<span class="Offer">@Html.DisplayFor(model => model.Offer)</span>*@
+            <span class="Offer">
+                @if (Model.Offer == true)
+                {
+                    <img src="~/image/Offer.png" />
+                }
+            </span>
             <span class="Color">@Html.DisplayFor(model => model.Color)</span>
             <span class="Specification">
                 @{

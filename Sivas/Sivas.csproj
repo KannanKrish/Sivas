@@ -157,6 +157,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="image\bullet.png" />
+    <Content Include="image\EnergyStarLand\OneStar.png" />
+    <Content Include="image\EnergyStarLand\TwoStar.png" />
+    <Content Include="image\EnergyStarLand\ThreeStar.png" />
+    <Content Include="image\EnergyStarLand\FourStar.png" />
+    <Content Include="image\EnergyStarLand\FiveStar.png" />
+    <Content Include="image\Offer.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
