@@ -31,6 +31,18 @@
     margin-top: 5px;
 }
 
+    .product_DescriptionPort .Category {
+        font-size: larger;
+        text-align: left;
+        display: block;
+    }
+
+    .product_DescriptionPort .Company {
+        font-size: larger;
+        text-align: left;
+        display: block;
+    }
+
     .product_DescriptionPort .Brand {
         font-size: larger;
         text-align: left;
@@ -41,7 +53,23 @@
         display: block;
     }
 
+    .product_DescriptionPort .Image {
+        display: block;
+    }
+
+    .product_DescriptionPort .Landscape {
+        display: block;
+    }
+
     .product_DescriptionPort .EneryStar {
+        display: block;
+    }
+
+    .product_DescriptionPort .Price {
+        display: block;
+    }
+
+    .product_DescriptionPort .Offer {
         display: block;
     }
 
@@ -53,7 +81,7 @@
         display: block;
     }
 
-        .product_DescriptionPort .Specification ul {            
+        .product_DescriptionPort .Specification ul {
             list-style: none;
         }
 
@@ -65,3 +93,7 @@
                 background-position-x: 0;
                 background-position-y: -6px;
             }
+
+    .product_DescriptionPort .Description {
+        display: block;
+    }

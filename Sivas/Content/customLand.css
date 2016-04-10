@@ -30,6 +30,18 @@
     margin-left: 20px;
 }
 
+    .product_DescriptionLand .Category {
+        font-size: larger;
+        text-align: center;
+        display: block;
+    }
+
+    .product_DescriptionLand .Company {
+        font-size: larger;
+        text-align: center;
+        display: block;
+    }
+
     .product_DescriptionLand .Brand {
         font-size: larger;
         text-align: center;
@@ -40,7 +52,23 @@
         display: block;
     }
 
+    .product_DescriptionLand .Image {
+        display: block;
+    }
+
+    .product_DescriptionLand .Landscape {
+        display: block;
+    }
+
     .product_DescriptionLand .EneryStar {
+        display: block;
+    }
+
+    .product_DescriptionLand .Price {
+        display: block;
+    }
+
+    .product_DescriptionLand .Offer {
         display: block;
     }
 
@@ -65,3 +93,7 @@
                 background-position-x: 0;
                 background-position-y: -6px;
             }
+
+    .product_DescriptionLand .Description {
+        display: block;
+    }

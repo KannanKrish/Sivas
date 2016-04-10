@@ -47,7 +47,7 @@ namespace Sivas.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Category,Image,Landscape,Brand,Model,EnergyStar,Color,Specification")] Products products)
+        public ActionResult Create([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace Sivas.Controllers
 
             return View(products);
         }
-        
+
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -81,13 +81,13 @@ namespace Sivas.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Category,Image,Landscape,Brand,Model,EnergyStar,Color,Specification")] Products products)
+        public ActionResult Edit([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
         {
             if (ModelState.IsValid)
             {
                 HttpPostedFileBase file = Request.Files["ImageData"];
                 products.Image = ReuseCode.ConvertToBytes(file);
-                db.Entry(products).State = EntityState.Modified;                
+                db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
