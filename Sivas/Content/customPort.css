@@ -97,3 +97,29 @@
     .product_DescriptionPort .Description {
         display: block;
     }
+
+.Overlap {
+    position: absolute;
+    opacity: 0;
+    background-color: #F53F42;
+    height: 240px;
+    width: 300px;
+    -webkit-transition: opacity 1s linear 0.1s;
+    -o-transition: opacity 1s linear 0.1s;
+    transition: opacity 1s linear 0.1s;
+}
+
+    .Overlap:hover {
+        -webkit-opacity: 0.9;
+        opacity: 0.9;
+        z-index: 3;
+    }
+
+    .Overlap .Text {
+        font-size: xx-large;
+        display: block;
+        text-align: center;
+        position: relative;
+        top: 40%;
+        color: #FFFFFF;
+    }
