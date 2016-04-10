@@ -65,9 +65,10 @@
     .product_DescriptionLand .EneryStar {
         display: block;
         position: relative;
+        top: -60px;
+        left: 2px;
         float: right;
-        top: -65px;
-        left: -2px;
+        clear:both;        
     }
 
     .product_DescriptionLand .Price {
@@ -76,24 +77,25 @@
 
     .product_DescriptionLand .Offer {
         display: block;
-        position: relative;
+        position: relative;        
+        top: -190px;
+        left: -210px;
         float: right;
-        top: -145px;
-        left: -125px;
+        clear:both;
         z-index: 2;
     }
 
     .product_DescriptionLand .Color {
-        display: block;
+        display: inline;
     }
 
     .product_DescriptionLand .Specification {
         display: block;
-        position:relative;
-        top:-60px;
+        margin-top:5px;
     }
 
         .product_DescriptionLand .Specification ul {
+            display:block;
             margin-left: -40px;
             list-style: none;
         }
@@ -103,16 +105,12 @@
                 background: url(../image/bullet.png) no-repeat;
                 padding-left: 30px;
                 padding-right: 10px;
-                position: relative;
-                top: -10px;
                 background-position-x: 0;
                 background-position-y: -6px;
             }
 
     .product_DescriptionLand .Description {
         display: block;
-        position: relative;
-        top: -80px;
     }
 
 .Overlap {
