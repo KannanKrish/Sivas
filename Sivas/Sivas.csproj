@@ -162,7 +162,13 @@
     <Content Include="image\EnergyStarLand\ThreeStar.png" />
     <Content Include="image\EnergyStarLand\FourStar.png" />
     <Content Include="image\EnergyStarLand\FiveStar.png" />
-    <Content Include="image\Offer.png" />
+    <Content Include="image\EnergyStarLand\Offer.png" />
+    <Content Include="image\EnergyStarPort\FiveStar.png" />
+    <Content Include="image\EnergyStarPort\FourStar.png" />
+    <Content Include="image\EnergyStarPort\Offer.png" />
+    <Content Include="image\EnergyStarPort\OneStar.png" />
+    <Content Include="image\EnergyStarPort\ThreeStar.png" />
+    <Content Include="image\EnergyStarPort\TwoStar.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

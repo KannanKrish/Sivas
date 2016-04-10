@@ -63,22 +63,31 @@
 
     .product_DescriptionPort .EneryStar {
         display: block;
+        position: relative;
+        top: -70px;
+        left: 156px;
     }
 
     .product_DescriptionPort .Price {
         display: block;
+        position: relative;
+        top: -50px;
     }
 
     .product_DescriptionPort .Offer {
         display: block;
+        position: relative;
+        top: 30px;
+        left: -40px;
     }
 
     .product_DescriptionPort .Color {
-        display: block;
+        display: ;        
+        float:none;
     }
 
     .product_DescriptionPort .Specification {
-        display: block;
+        display: inline;
     }
 
         .product_DescriptionPort .Specification ul {
@@ -86,16 +95,17 @@
         }
 
             .product_DescriptionPort .Specification ul li {
-                display: flex;
+                display: block;
                 background: url(../image/bullet.png) no-repeat;
                 padding-left: 30px;
                 padding-right: 10px;
+                margin-left: 50px;
                 background-position-x: 0;
                 background-position-y: -6px;
             }
 
     .product_DescriptionPort .Description {
-        display: block;
+        display: inline;
     }
 
 .Overlap {

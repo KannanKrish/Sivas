@@ -28,7 +28,7 @@
 <div class="ProductContainer">
     @foreach (var item in Model)
     {
-        <div class="product" >
+        <div class="product">
             <div class="Overlap"><span class="Text" @("onclick=GoToRoom('" + item.Id + "')")>More Details</span></div>
             <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
                 @{
@@ -46,37 +46,73 @@
                 @*<span class="EneryStar">@Html.DisplayFor(model => item.EnergyStar)</span>*@
                 <span class="EneryStar">
                     @{
-                        if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
+                        if (item.Landscape)
                         {
-                            <img src="~/image/EnergyStarLand/FiveStar.png" />
+                            if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
+                            {
+                                <img src="~/image/EnergyStarLand/FiveStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
+                            {
+                                <img src="~/image/EnergyStarLand/FourStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
+                            {
+                                <img src="~/image/EnergyStarLand/ThreeStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
+                            {
+                                <img src="~/image/EnergyStarLand/TwoStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
+                            {
+                                <img src="~/image/EnergyStarLand/OneStar.png" />
+                            }
                         }
-                        else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
+                        else
                         {
-                            <img src="~/image/EnergyStarLand/FourStar.png" />
-                        }
-                        else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
-                        {
-                            <img src="~/image/EnergyStarLand/ThreeStar.png" />
-                        }
-                        else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
-                        {
-                            <img src="~/image/EnergyStarLand/TwoStar.png" />
-                        }
-                        else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
-                        {
-                            <img src="~/image/EnergyStarLand/OneStar.png" />
+                            if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
+                            {
+                                <img src="~/image/EnergyStarPort/FiveStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
+                            {
+                                <img src="~/image/EnergyStarPort/FourStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
+                            {
+                                <img src="~/image/EnergyStarPort/ThreeStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
+                            {
+                                <img src="~/image/EnergyStarPort/TwoStar.png" />
+                            }
+                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
+                            {
+                                <img src="~/image/EnergyStarPort/OneStar.png" />
+                            }
                         }
                     }
                 </span>
                 <span class="Price">@Html.DisplayFor(model => item.Price)</span>
-                <span class="Offer">
-                    @{
-                        if (item.Offer == true)
+                @{
+                    if (item.Offer)
+                    {
+                        if (item.Landscape)
                         {
-                            <img src="~/image/Offer.png" />
+                            <span class="Offer">
+                                <img src="~/image/EnergyStarLand/Offer.png" />
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="Offer">
+                                <img src="~/image/EnergyStarPort/Offer.png" />
+                            </span>
                         }
                     }
-                </span>
+                }
+
                 <span class="Color">@Html.DisplayFor(model => item.Color)</span>
                 <span class="Specification">
                     @{
