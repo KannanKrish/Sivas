@@ -134,6 +134,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201603271953515_InitialCreate.cs" />
+    <Compile Include="Migrations\201603271953515_InitialCreate.Designer.cs">
+      <DependentUpon>201603271953515_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201604100610577_AddCompanyPriceOfferDescriptionToProducts.cs" />
+    <Compile Include="Migrations\201604100610577_AddCompanyPriceOfferDescriptionToProducts.Designer.cs">
+      <DependentUpon>201604100610577_AddCompanyPriceOfferDescriptionToProducts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\SivasContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -192,6 +201,14 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603271953515_InitialCreate.resx">
+      <DependentUpon>201603271953515_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604100610577_AddCompanyPriceOfferDescriptionToProducts.resx">
+      <DependentUpon>201604100610577_AddCompanyPriceOfferDescriptionToProducts.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
