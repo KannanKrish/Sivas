@@ -14,111 +14,6 @@
         <link href="/Sivas/Content/customPort.css" rel="stylesheet" />
     }
 }
-
-@*<div>
-    <h4>Products</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Company)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Company)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Brand)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Brand)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Landscape)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Landscape)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EnergyStar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EnergyStar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Offer)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Offer)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Color)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Specification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Specification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
-</div>*@
-
-
 <div class="ProductContainer">
     <div class="product">
         <div @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
@@ -128,11 +23,33 @@
             <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
         </div>
         <div @(Model.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
-            <span class="Brand">@Html.DisplayFor(model => model.Category)</span>
-            <span class="Model">@Html.DisplayFor(model => model.Brand)</span>
+            <span class="Category">@Html.DisplayFor(model => model.Category)</span>
+            <span class="Company">@Html.DisplayFor(model => model.Company)</span>
+            <span class="Brand">@Html.DisplayFor(model => model.Brand)</span>
+            <span class="Model">@Html.DisplayFor(model => model.Model)</span>
+            @*<span class="Image">@Html.DisplayFor(model => model.Image)</span>*@
+            @*<span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>*@
             <span class="EneryStar">@Html.DisplayFor(model => model.EnergyStar)</span>
+            <span class="Price">@Html.DisplayFor(model => model.Price)</span>
+            @*<span class="Offer">@Html.DisplayFor(model => model.Offer)</span>*@
             <span class="Color">@Html.DisplayFor(model => model.Color)</span>
-            <span class="Specification">@Html.DisplayFor(model => model.Specification)</span>
+            <span class="Specification">
+                @{
+                    var displaySpecification = "<ul><li>";
+                    if (Model.Specification.Contains("~"))
+                    {
+                        displaySpecification += Model.Specification.Replace("~", "</li><li>");
+                    }
+                    else
+                    {
+                        displaySpecification += Model.Specification;
+                    }
+                    displaySpecification += "</li></ul>";
+                    Model.Specification = displaySpecification;
+                }
+                @Html.Raw(Server.HtmlDecode(Model.Specification))
+            </span>
+            <span class="Description">@Html.DisplayFor(model => model.Description)</span>
         </div>
     </div>
 </div>

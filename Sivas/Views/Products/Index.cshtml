@@ -3,98 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Company)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Brand)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Model)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Landscape)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EnergyStar)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Offer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Color)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Specification)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Company)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Brand)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Model)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Landscape)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EnergyStar)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Offer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Color)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Specification)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>*@
-
+@*@Html.ActionLink("Create New", "Create")*@
 
 @section styles{
     @*@if (Model[0].Model.Landscape == true)
@@ -126,9 +36,15 @@
                 <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
             </div>
             <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
-                <span class="Brand">@Html.DisplayFor(model => item.Category)</span>
-                <span class="Model">@Html.DisplayFor(model => item.Brand)</span>
+                <span class="Category">@Html.DisplayFor(model => item.Category)</span>
+                <span class="Company">@Html.DisplayFor(model => item.Company)</span>
+                <span class="Brand">@Html.DisplayFor(model => item.Brand)</span>
+                <span class="Model">@Html.DisplayFor(model => item.Model)</span>
+                @*<span class="Image">@Html.DisplayFor(model => item.Image)</span>*@
+                @*<span class="Landscape">@Html.DisplayFor(model => item.Landscape)</span>*@
                 <span class="EneryStar">@Html.DisplayFor(model => item.EnergyStar)</span>
+                <span class="Price">@Html.DisplayFor(model => item.Price)</span>
+               @* <span class="Offer">@Html.DisplayFor(model => item.Offer)</span>*@
                 <span class="Color">@Html.DisplayFor(model => item.Color)</span>
                 <span class="Specification">
                     @{
@@ -146,6 +62,7 @@
                     }
                     @Html.Raw(Server.HtmlDecode(item.Specification))
                 </span>
+                <span class="Description">@Html.DisplayFor(model => item.Description)</span>
             </div>
         </div>
                         }
