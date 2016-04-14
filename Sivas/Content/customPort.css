@@ -2,6 +2,7 @@
 
 .ProductContainer {
     color: #808080;
+    clear:both;
 }
 
 .product {
@@ -9,7 +10,7 @@
     margin: 10px;
     float: left;
     height: 240px;
-    width: 300px;
+    width: 300px;    
 }
 
     .product:hover {

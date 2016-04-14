@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using Sivas.Models;
 using Sivas.CustomMethods;
+using PagedList.Mvc;
+using PagedList;
 
 namespace Sivas.Controllers
 {
@@ -15,10 +17,16 @@ namespace Sivas.Controllers
     {
         private SivasContext db = new SivasContext();
 
+        //// GET: Products
+        //public ActionResult Index()
+        //{
+        //    return View(db.Products.ToList());
+        //}
+
         // GET: Products
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Products.ToList());
+            return View(db.Products.ToList().ToPagedList(page ?? 1, 6));
         }
 
         // GET: Products/Details/5

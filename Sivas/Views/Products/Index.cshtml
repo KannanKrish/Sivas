@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Sivas.Models.Products>
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<Sivas.Models.Products>
 
 @{
     ViewBag.Title = "Index";
@@ -7,33 +10,25 @@
 @*@Html.ActionLink("Create New", "Create")*@
 
 @section styles{
-    @*@if (Model[0].Model.Landscape == true)
-        {
-            < link href = "~/Content/customLand.css" rel = "stylesheet" />
-        }
-        else
-        {
-            < link href = "~/Content/customPort.css" rel = "stylesheet" />
-        }*@
     <link href="~/Content/customLand.css" rel="stylesheet" />
     <link href="~/Content/customPort.css" rel="stylesheet" />
 }
 <script type="text/javascript">
     function GoToRoom(id) {
-        window.location =  '@Html.Raw(@Url.Action("Details", "Products"))' + '?id=' + id // "/Sivas/Products/Details?id=" + id;
-                }
+        window.location = '@Html.Raw(@Url.Action("Details", "Products"))' + '?id=' + id;
+    }
 </script>
 
 <h2>Index</h2>
 <div class="ProductContainer">
     @foreach (var item in Model)
-                {
+    {
         <div class="product">
             <div class="Overlap"><span class="Text" @("onclick=GoToRoom('" + item.Id + "')")>More Details</span></div>
             <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
                 @{
                     var message = item.Category + " " + item.Model;
-            }
+                }
                 <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
             </div>
             <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
@@ -135,3 +130,4 @@
         </div>
                         }
 </div>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded });
