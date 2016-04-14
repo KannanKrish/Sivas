@@ -23,10 +23,26 @@ namespace Sivas.Models
     }
     public enum ProductCategory
     {
-        Firdge, Wood, AC
+        TV,
+        Refrigerator,
+        AC,
+        Cooler,
+        Woodern,
+        WoodenFurniture,
+        WoodenCot,
+        WoodenKitchenSet,
+        WoodenPoojaTable,
+        Fan,
+        DiningTable,
+        Sofa,
+        SmallAppliances
     }
     public enum ProductEnergyStar
     {
-        One, Two, Three, Four, Five
+        One,
+        Two,
+        Three,
+        Four,
+        Five
     }
 }

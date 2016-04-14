@@ -17,14 +17,24 @@ namespace Sivas.Controllers
     {
         private SivasContext db = new SivasContext();
 
-        //// GET: Products
-        //public ActionResult Index()
-        //{
-        //    return View(db.Products.ToList());
-        //}
+        // GET: Products
+        public ActionResult Index(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Products products = db.Products.Find(id);
+            if (products == null)
+            {
+                return HttpNotFound();
+            }
+            return View(products);
+            //return View(db.Products.ToList());
+        }
 
         // GET: Products
-        public ActionResult Index(ProductCategory? category, int? page)
+        public ActionResult Category(ProductCategory? category, int? page)
         {
             if (category != null)
                 return View(db.Products.Where(x => x.Category == category).ToList().ToPagedList(page ?? 1, 6));
