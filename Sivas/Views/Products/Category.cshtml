@@ -130,4 +130,4 @@
         </div>
                         }
 </div>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded });
+@Html.PagedListPager(Model, page => Url.Action("Category", new { page, category = Request.QueryString["category"] }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded });

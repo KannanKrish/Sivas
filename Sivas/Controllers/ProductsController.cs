@@ -18,19 +18,9 @@ namespace Sivas.Controllers
         private SivasContext db = new SivasContext();
 
         // GET: Products
-        public ActionResult Index(int? id)
+        public ActionResult Index()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Products products = db.Products.Find(id);
-            if (products == null)
-            {
-                return HttpNotFound();
-            }
-            return View(products);
-            //return View(db.Products.ToList());
+            return View();
         }
 
         // GET: Products
