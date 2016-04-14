@@ -2,7 +2,7 @@
 
 .ProductContainer {
     color: #808080;
-    clear:both;
+    clear: both;
 }
 
 .product {
@@ -10,7 +10,7 @@
     margin: 10px;
     float: left;
     height: 240px;
-    width: 300px;    
+    width: 300px;
 }
 
     .product:hover {
@@ -64,11 +64,11 @@
 
     .product_DescriptionPort .EneryStar {
         display: block;
-        position: relative;        
+        position: relative;
         top: -200px;
         left: 247px;
-        float:left;
-        clear:both;
+        float: left;
+        clear: both;
     }
 
     .product_DescriptionPort .Price {
@@ -78,8 +78,8 @@
     .product_DescriptionPort .Offer {
         display: block;
         position: relative;
-        float:right;
-        clear:both;
+        float: right;
+        clear: both;
         top: -80px;
         left: -200px;
     }
@@ -135,3 +135,8 @@
         top: 40%;
         color: #FFFFFF;
     }
+
+.pagination-container {
+    clear: both;
+    text-align: center;
+}

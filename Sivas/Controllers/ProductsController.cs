@@ -24,9 +24,12 @@ namespace Sivas.Controllers
         //}
 
         // GET: Products
-        public ActionResult Index(int? page)
+        public ActionResult Index(ProductCategory? category, int? page)
         {
-            return View(db.Products.ToList().ToPagedList(page ?? 1, 6));
+            if (category != null)
+                return View(db.Products.Where(x => x.Category == category).ToList().ToPagedList(page ?? 1, 6));
+            else
+                return View(db.Products.ToList().ToPagedList(page ?? 1, 6));
         }
 
         // GET: Products/Details/5
