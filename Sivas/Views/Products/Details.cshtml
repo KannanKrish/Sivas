@@ -54,12 +54,23 @@
                 }
             </span>
             <span class="Price">@Html.DisplayFor(model => model.Price)</span>
-            <span class="Offer">
-                @if (Model.Offer == true)
+            @{
+                if (Model.Offer)
                 {
-                    <img src="~/image/Offer.png" />
+                    if (Model.Landscape)
+                    {
+                        <span class="Offer">
+                            <img src="~/image/EnergyStarLand/Offer.png" />
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="Offer">
+                            <img src="~/image/EnergyStarPort/Offer.png" />
+                        </span>
+                    }
                 }
-            </span>
+            }
             <span class="Color">@Html.DisplayFor(model => model.Color)</span>
             <span class="Specification">
                 @{

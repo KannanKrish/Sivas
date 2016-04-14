@@ -77,10 +77,10 @@
     .product_DescriptionPort .Offer {
         display: block;
         position: relative;
-        float:left;
+        float:right;
         clear:both;
-        top: 180px;
-        left: 50px;
+        top: -80px;
+        left: -200px;
     }
 
     .product_DescriptionPort .Color {

@@ -20,20 +20,20 @@
 }
 <script type="text/javascript">
     function GoToRoom(id) {
-        window.location = "/Sivas/Products/Details?id=" + id;
-    }
+        window.location =  '@Html.Raw(@Url.Action("Details", "Products"))' + '?id=' + id // "/Sivas/Products/Details?id=" + id;
+                }
 </script>
 
 <h2>Index</h2>
 <div class="ProductContainer">
     @foreach (var item in Model)
-    {
+                {
         <div class="product">
             <div class="Overlap"><span class="Text" @("onclick=GoToRoom('" + item.Id + "')")>More Details</span></div>
             <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
                 @{
                     var message = item.Category + " " + item.Model;
-                }
+            }
                 <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
             </div>
             <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
