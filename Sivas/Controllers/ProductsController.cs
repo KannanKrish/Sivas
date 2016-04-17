@@ -47,6 +47,8 @@ namespace Sivas.Controllers
             return View(products);
         }
 
+        [Authorize]
+
         // GET: Products/Create
         public ActionResult Create()
         {
@@ -58,6 +60,7 @@ namespace Sivas.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
         {
             if (ModelState.IsValid)
@@ -72,6 +75,7 @@ namespace Sivas.Controllers
             return View(products);
         }
 
+        [Authorize]
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -92,6 +96,7 @@ namespace Sivas.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
         {
             if (ModelState.IsValid)
@@ -106,6 +111,7 @@ namespace Sivas.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

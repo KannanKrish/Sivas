@@ -1,0 +1,53 @@
+/* CSS Document */
+.container {
+	color: #808080;
+}
+.product {
+	background-color: rgb(255, 250, 250);
+	margin: 10px;
+	float: left;
+	height: 240px;
+	width: 300px;
+}
+.product_Image {
+	display: block;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	height: 200px;
+	width: 300px;
+	z-index: 1;
+}
+.product_Title {
+	display: compact;
+	text-align:center;
+	font-size:xx-large;
+}
+.Overlap {
+	position: absolute;
+	opacity: 0;
+	background-color: #F53F42;
+	height: 240px;
+	width: 300px;
+	-webkit-transition: opacity 1s linear 0.1s;
+	-o-transition: opacity 1s linear 0.1s;
+	transition: opacity 1s linear 0.1s;
+}
+.Overlap:hover {
+	-webkit-opacity: 0.9;
+	opacity: 0.9;
+	z-index: 3;
+}
+.Overlap .Text {
+	font-size: larger;
+	display: block;
+	text-align: center;
+	position: relative;
+	top: 40%;
+}
+.Overlap .Text a {
+	color: #FFFFFF;
+	font-size: xx-large;
+	text-decoration: none;
+}
+
