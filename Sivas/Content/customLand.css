@@ -10,6 +10,9 @@
     float: left;
     height: 240px;
     width: 300px;
+    -webkit-box-shadow: 2px 2px 4px 2px #2D2D2D;
+    box-shadow: 2px 2px 4px 2px #2D2D2D;
+	border-radius: 10px;
 }
 
     .product:hover {
@@ -122,12 +125,14 @@
     -webkit-transition: opacity 1s linear 0.1s;
     -o-transition: opacity 1s linear 0.1s;
     transition: opacity 1s linear 0.1s;
+    border-radius: 10px;
 }
 
     .Overlap:hover {
         -webkit-opacity: 0.9;
         opacity: 0.9;
         z-index: 3;
+        border-radius: 10px;
     }
 
     .Overlap .Text {
