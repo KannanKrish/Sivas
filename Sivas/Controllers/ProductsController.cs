@@ -20,16 +20,34 @@ namespace Sivas.Controllers
         // GET: Products
         public ActionResult Index()
         {
-            return View();
+            List<Products> items = new List<Products>();
+            foreach (ProductCategory item in Enum.GetValues(typeof(ProductCategory)))
+            {
+                try
+                {
+                    items.Add(db.Products.First(x => x.Category == item && x.Offer == true));
+                }
+                catch (InvalidOperationException) { }
+            }
+            return View(items.AsEnumerable());
         }
 
         // GET: Products
         public ActionResult Category(ProductCategory? category, int? page)
         {
+            List<Products> items = new List<Products>();
             if (category != null)
-                return View(db.Products.Where(x => x.Category == category).ToList().ToPagedList(page ?? 1, 6));
+            {
+                items.AddRange(db.Products.Where(x => x.Category == category && x.Offer == true));
+                items.AddRange(db.Products.Where(x => x.Category == category && x.Offer == false));
+                return View(items.ToPagedList(page ?? 1, 6));
+            }
             else
-                return View(db.Products.ToList().ToPagedList(page ?? 1, 6));
+            {
+                items.AddRange(db.Products.Where(x => x.Offer == true));
+                items.AddRange(db.Products.Where(x => x.Offer == false));
+                return View(items.ToPagedList(page ?? 1, 6));
+            }
         }
 
         // GET: Products/Details/5

@@ -68,8 +68,8 @@
     .product_DescriptionLand .EneryStar {
         display: block;
         position: relative;
-        top: -60px;
-        left: 2px;
+        top: -63px;
+        left: -1px;
         float: right;
         clear: both;
     }
