@@ -141,6 +141,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201603271953515_InitialCreate.cs" />
     <Compile Include="Migrations\201603271953515_InitialCreate.Designer.cs">
       <DependentUpon>201603271953515_InitialCreate.cs</DependentUpon>
@@ -217,6 +224,7 @@
     <Content Include="image\Products\WoodenCot2.png" />
     <Content Include="image\Products\WoodenFurniture.png" />
     <Content Include="image\Products\Woodern.png" />
+    <Content Include="Login.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.2.3.js" />
