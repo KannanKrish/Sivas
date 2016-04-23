@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sivas.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,23 +9,42 @@ namespace Sivas.Controllers
 {
     public class HomeController : Controller
     {
+        private SivasContext db = new SivasContext();
         public ActionResult Index()
         {
-            return View();
+            List<Products> items = new List<Products>();
+            foreach (ProductCategory item in Enum.GetValues(typeof(ProductCategory)))
+            {
+                try
+                {
+                    items.Add(db.Products.First(x => x.Category == item && x.Offer == true));
+                }
+                catch (InvalidOperationException) { }
+            }
+            return View(items.AsEnumerable());
+            //return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "About Us";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact Information";
 
             return View();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
