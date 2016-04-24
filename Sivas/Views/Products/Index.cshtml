@@ -5,7 +5,12 @@
 @section styles{
     <link href="~/Content/customProduct.css" rel="stylesheet" />
 }
-
+@{
+    if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        <h2> @Html.ActionLink("Create", "Create")</h2>
+    }
+}
 <script type="text/javascript">
     function GoToRoom(category) {
         window.location = '@Html.Raw(@Url.Action("Category", "Products"))' + '?category=' + category;

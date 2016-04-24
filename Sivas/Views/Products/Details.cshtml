@@ -92,12 +92,14 @@
         </div>
     </div>
 </div>
-<p>
-    @{
-        if (HttpContext.Current.User.Identity.IsAuthenticated)
-        {
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+<div style="clear:left">
+    <p>
+        @{
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <h2>@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</h2>
+            }
         }
-    }
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>
