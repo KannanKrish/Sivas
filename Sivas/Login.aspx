@@ -4,7 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Login to Master Access</title>
     <style type="text/css">
         .background {
             background-color: #e9ebcd;

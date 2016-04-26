@@ -4,8 +4,9 @@
     ViewBag.Title = "Home Page";
 }
 
-@section styles{
-    <link href="~/Content/customProduct.css" rel="stylesheet" />
+@section styles{    
+    <link href="~/Content/customLand.css" rel="stylesheet" />
+    <link href="~/Content/customPort.css" rel="stylesheet" />
 }
 
 <script type="text/javascript">
@@ -19,11 +20,14 @@
     {
         <div class="product" @("onclick=GoToRoom('" + item.Category + "')")>
             <div class="Overlap"><span class="Text">See More</span></div>
-            <div class="product_Image">
-                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" class="product_Image" />
+            <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
+                @{
+                    var message = item.Category + " " + item.Model;
+                }
+                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
             </div>
             <div class="product_Title">@item.Category </div>
-            <div class="PriceHolder"><span class="Text">@item.Price</span></div>
+            <div @(item.Landscape == true ? "class=PriceHolderLand" : "class=PriceHolderPort")><span class="Text">@item.Price</span></div>
         </div>
-    }
+                    }
 </div>

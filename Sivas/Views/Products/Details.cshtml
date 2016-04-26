@@ -5,14 +5,8 @@
 }
 
 @section styles{
-    @if (Model.Landscape == true)
-    {
-        <link href="/Sivas/Content/customLand.css" rel="stylesheet" />
-    }
-    else
-    {
-        <link href="/Sivas/Content/customPort.css" rel="stylesheet" />
-    }
+    <link href="~/Content/customLand.css" rel="stylesheet" />
+    <link href="~/Content/customPort.css" rel="stylesheet" />
 }
 <div class="ProductContainer">
     <div class="product">
@@ -28,7 +22,7 @@
             <span class="Brand">@Html.DisplayFor(model => model.Brand)</span>
             <span class="Model">@Html.DisplayFor(model => model.Model)</span>
             @*<span class="Image">@Html.DisplayFor(model => model.Image)</span>*@
-            <span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>
+            @*<span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>*@
             <span class="EneryStar">
                 @{
                     if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
@@ -97,7 +91,7 @@
         @{
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                <h2>@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</h2>
+                <h2>@Html.ActionLink("Edit Current Item", "Edit", new { id = Model.Id })</h2>
             }
         }
         @Html.ActionLink("Back to List", "Index")

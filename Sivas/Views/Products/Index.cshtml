@@ -5,10 +5,11 @@
 @section styles{
     <link href="~/Content/customProduct.css" rel="stylesheet" />
 }
+
 @{
     if (HttpContext.Current.User.Identity.IsAuthenticated)
     {
-        <h2> @Html.ActionLink("Create", "Create")</h2>
+        <h2> @Html.ActionLink("Insert New Item", "Create")</h2>
     }
 }
 <script type="text/javascript">

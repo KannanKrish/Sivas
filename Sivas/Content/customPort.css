@@ -8,6 +8,7 @@
 .product {
     background-color: rgb(255, 250, 250);
     margin: 10px;
+    margin-left: 40px;
     float: left;
     height: 240px;
     width: 300px;
@@ -115,7 +116,7 @@
             }
 
     .product_DescriptionPort .Description {
-        display: block;             
+        display: block;
     }
 
 .Overlap {
@@ -126,12 +127,12 @@
     width: 300px;
     -webkit-transition: opacity 1s linear 0.1s;
     -o-transition: opacity 1s linear 0.1s;
+    -moz-transition: opacity 1s linear 0.1s;
     transition: opacity 1s linear 0.1s;
     border-radius: 10px;
 }
 
     .Overlap:hover {
-        -webkit-opacity: 0.9;
         opacity: 0.9;
         z-index: 3;
         border-radius: 10px;
@@ -150,3 +151,36 @@
     clear: both;
     text-align: center;
 }
+
+.product_Title {
+    display: compact;
+    color: #2D2D2D;
+    text-align: center;
+    font-size: x-large;
+    margin-top: 5px;
+}
+
+.PriceHolderPort {
+    border-radius: 50%;
+    background-color: #fed0d0;
+    position: relative;
+    bottom: 0;
+    left: -30px;
+    clear: both;
+    width: 70px;
+    height: 70px;
+    -webkit-box-shadow: -2px 1px 6px #F53F42;
+    box-shadow: -2px 1px 6px #F53F42;
+    z-index: 3;
+    opacity: 0.85;
+}
+
+    .PriceHolderPort .Text {
+        position: relative;
+        text-align: right;
+        color: #2940f5;
+        font-size: medium;
+        top: 25px;
+        left: 5px;
+        text-shadow: 1px 1px 1px #b2fefe;
+    }
