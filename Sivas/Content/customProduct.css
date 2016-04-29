@@ -6,8 +6,9 @@
 .product {
     background-color: rgb(255, 250, 250);
     margin-top: 10px;
-    margin-bottom: 20px;
-    margin-left: 40px;
+    margin-bottom: 40px; 
+    margin-left:40px;   
+    margin-right:40px;
     float: left;
     height: 240px;
     width: 300px;

@@ -39,6 +39,7 @@ namespace Sivas.Models
     }
     public enum ProductEnergyStar
     {
+        None,
         One,
         Two,
         Three,
