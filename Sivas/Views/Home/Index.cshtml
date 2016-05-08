@@ -28,7 +28,7 @@
             </div>
             <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
                 <span class="product_Title">@item.Category </span>
-                <span class="Company">@item.Company + " " + @item.Brand </span>
+                <span class="Company">@item.Company  @item.Brand </span>
                 <span class="EneryStar">
                     @{
                         if (item.Landscape)

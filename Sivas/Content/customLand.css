@@ -149,27 +149,28 @@
     text-align: center;
 }
 
-.PriceHolderLand {    
+.PriceHolderLand {
+    display: inline-flex;
     border-radius: 50%;
     background-color: #fed0d0;
     position: relative;
-    bottom: -60px;
-    left: -30px;
-    float: left;
+    top: -80px;
+    left: -260px;
+    float: right;
+    clear: both;
     width: 70px;
     height: 70px;
     -webkit-box-shadow: -2px 1px 6px #F53F42;
     box-shadow: -2px 1px 6px #F53F42;
     z-index: 3;
-    opacity:0.85;
+    opacity: 0.85;
 }
 
     .PriceHolderLand .Text {
         position: relative;
-        text-align: right;
+        top: 25px;
+        left: 5px;        
         color: #2940f5;
         font-size: medium;
-        top: 25px;
-        left: 5px;
         text-shadow: 1px 1px 1px #b2fefe;
     }
