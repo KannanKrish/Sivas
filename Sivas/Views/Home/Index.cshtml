@@ -27,7 +27,7 @@
                 <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
             </div>
             <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
-                <span class="product_Title">@item.Category </span>
+                @* <span class="product_Title">@item.Category </span>*@
                 <span class="Company">@item.Company  @item.Brand </span>
                 <span class="EneryStar">
                     @{

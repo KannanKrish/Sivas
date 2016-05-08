@@ -11,6 +11,7 @@
     float: left;
     height: 240px;
     width: 300px;
+    overflow: hidden;
     -webkit-box-shadow: 2px 2px 4px 2px #2D2D2D;
     box-shadow: 2px 2px 4px 2px #2D2D2D;
     border-radius: 10px;
@@ -154,8 +155,8 @@
     border-radius: 50%;
     background-color: #fed0d0;
     position: relative;
-    top: -80px;
-    left: -260px;
+    top: -90px;
+    left: -230px;
     float: right;
     clear: both;
     width: 70px;
@@ -163,13 +164,13 @@
     -webkit-box-shadow: -2px 1px 6px #F53F42;
     box-shadow: -2px 1px 6px #F53F42;
     z-index: 3;
-    opacity: 0.85;
+    opacity: 0.7;
 }
 
     .PriceHolderLand .Text {
         position: relative;
         top: 25px;
-        left: 5px;        
+        left: 5px;
         color: #2940f5;
         font-size: medium;
         text-shadow: 1px 1px 1px #b2fefe;
