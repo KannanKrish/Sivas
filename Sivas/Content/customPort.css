@@ -15,6 +15,7 @@
     -webkit-box-shadow: 2px 2px 4px 2px #2D2D2D;
     box-shadow: 2px 2px 4px 2px #2D2D2D;
     border-radius: 10px;
+    overflow: hidden;
 }
 
     .product:hover {
@@ -164,23 +165,23 @@
     border-radius: 50%;
     background-color: #fed0d0;
     position: relative;
-    bottom: 0;
-    left: -30px;
+    top: -110px;
+    left: -230px;
+    float: right;
     clear: both;
     width: 70px;
     height: 70px;
     -webkit-box-shadow: -2px 1px 6px #F53F42;
     box-shadow: -2px 1px 6px #F53F42;
     z-index: 3;
-    opacity: 0.85;
+    opacity: 0.7;
 }
 
     .PriceHolderPort .Text {
         position: relative;
-        text-align: right;
-        color: #2940f5;
-        font-size: medium;
         top: 25px;
         left: 5px;
+        color: #2940f5;
+        font-size: medium;
         text-shadow: 1px 1px 1px #b2fefe;
     }
