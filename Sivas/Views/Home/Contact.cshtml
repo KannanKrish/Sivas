@@ -1,17 +1,93 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@section styles{
+    <style>
+        .holder {
+            width: 250px;
+            height: 150px;
+            float: left;
+            margin: 10px;
+            background-color: white;
+            background-image: linear-gradient(to top, rgba(253, 124, 0, 0.09) 0%, rgba(0, 96, 27, 0.09) 50%, rgba(111, 21, 108, 0.09) 100%);
+            box-shadow: 3.7px 4.7px 9px 1px rgba(0, 0, 0, 0.7), inset 1.8px 2.4px 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
 
-<address>
-    Karan T.V. Opposite, Bye-Pass Road<br />
-    Vannarpettai, Tirunelveli.<br />
-    <abbr title="Phone">P:</abbr>
-    93441-52455
-</address>
+        .header {
+            position: relative;
+            top: -20px;
+            width: 250px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 10px 10px 0px 0px;
+        }
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:sivas.support@gmail.com">sivas.support@gmail.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:sivas.marketing@gmail.com">sivas.marketing@gmail.com</a>
-</address>
+        address {
+            padding-left: 10px;
+            margin-top: -20px;
+        }
+
+        h3 {
+            padding-top: 5px;
+            text-align: center;
+            color: rgb(255, 255, 255);
+        }
+
+        .heading {
+            width: 100%;
+            height: 40px;
+            background-color: rgba(0,0,0,0.3);
+        }
+    </style>
+}
+
+<h2 class="heading" style="text-align:center">@ViewBag.Message</h2>
+
+<div>
+    @* Branch 1 *@
+    <div class="holder">
+        <div class="header"><h3>Tirunelveli</h3></div>
+        <address>
+            A. Annamalai,<br />
+            44, Sivanthinagar,<br />
+            Tirunelveli Junction.<br />
+            <abbr title="Phone">Ph:</abbr>
+            96003-37635
+        </address>
+    </div>
+    @* Branch 2 *@
+    <div class="holder">
+        <div class="header"><h3>Kovilpatti</h3></div>
+        <address>
+            Saker,<br />
+            176, AKS Theater Road,<br />
+            Kovilpatti.<br />
+            <abbr title="Phone">Ph:</abbr>
+            97914-08909
+        </address>
+    </div>
+    @* Branch 3 *@
+    <div class="holder">
+        <div class="header"><h3>Thuthukudi</h3></div>
+        <address>
+            Guru,<br />
+            44, Balavinayagar koil street,<br />
+            Thuthukudi.<br />
+            <abbr title="Phone">Ph:</abbr>
+            97515-11527
+        </address>
+    </div>
+    @* Branch 4 *@
+    <div class="holder">
+        <div class="header"><h3>Thrichandure</h3></div>
+        <address>
+            Kannan,<br />
+            27, Kamarajar salai,<br />
+            Opposite to Anand Jewellary,<br />
+            Thrichandure.<br />
+            <abbr title="Phone">Ph:</abbr>
+            82205-14007
+        </address>
+    </div>
+</div>

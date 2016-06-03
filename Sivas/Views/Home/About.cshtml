@@ -1,7 +1,25 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+@section styles{
+    <style>
+        .about-us {
+            align-content: center;
+            text-shadow: 0 0 2.8px rgb(161, 152, 1);
+            color: rgb(212, 197, 32);
+        }
 
-<p>Sivas<br />The Complete Home</p>
+        .motto {
+            align-content: center;
+            text-shadow: 0 0 2px rgb(79, 0, 0);
+            color: rgb(255, 64, 78);
+        }
+    </style>
+}
+
+@*  Placing SivaS Logo Animation here *@
+
+<h2 class="about-us">@ViewBag.Message</h2>
+<p>A concern of leading group in Tamilnadu involved in manufacturing and distribution of various products. Founded in 2001 and having number of show rooms in Tamilnadu.</p>
+<h4 class="motto">The Motto is to low Margin High volume</h4>
+<p>Having an own manufacturing unit for wooden furniture we can server you as per year equipment.</p>

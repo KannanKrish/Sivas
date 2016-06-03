@@ -34,7 +34,7 @@ namespace Sivas.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Contact Information";
+            ViewBag.Message = "Contact Informations";
 
             return View();
         }
