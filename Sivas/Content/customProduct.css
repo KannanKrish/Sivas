@@ -5,10 +5,7 @@
 
 .product {
     background-color: #fffafa;
-    margin-top: 10px;
-    margin-bottom: 40px;
-    margin-left: 20px;
-    margin-right: 40px;
+    margin: 10px 40px;
     float: left;
     height: 240px;
     width: 300px;
