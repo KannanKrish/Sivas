@@ -197,6 +197,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
+    <Content Include="image\Logo_English.jpg" />
     <Content Include="image\Products\AC.png" />
     <Content Include="image\Products\Cooler.png" />
     <Content Include="image\Products\Cooler2.png" />

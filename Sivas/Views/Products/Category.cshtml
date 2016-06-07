@@ -20,8 +20,8 @@
 <div class="ProductContainer">
     @foreach (var item in Model)
     {
-        <div class="product">
-            <div class="Overlap"><span class="Text" @("onclick=GoToRoom('" + item.Id + "')")>More Details</span></div>
+        <div class="product" @("onclick=GoToRoom('" + item.Id + "')")>
+            <div class="Overlap"><span class="Text">More Details</span></div>
             <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
                 @{
                     var message = item.Category + " " + item.Model;

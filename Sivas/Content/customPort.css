@@ -8,7 +8,7 @@
 .product {
     background-color: rgb(255, 250, 250);
     margin: 10px;
-    margin-left: 40px;
+    margin-left: 20px;
     float: left;
     height: 240px;
     width: 300px;
@@ -40,21 +40,25 @@
 .product_DescriptionPort {
     display: compact;
     margin-top: 5px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
     .product_DescriptionPort .Category {
-        font-size: larger;
+        text-shadow: 0 0 1px rgb(234, 20, 20);
+        font-size: x-large;
         text-align: left;
         display: block;
     }
 
     .product_DescriptionPort .Company {
+        text-shadow: 0 0 1px rgb(11, 117, 219);
         font-size: larger;
         text-align: left;
         display: block;
     }
 
     .product_DescriptionPort .Brand {
+        text-shadow: 0 0 1px rgb(52, 226, 19);
         font-size: larger;
         text-align: left;
         display: block;
@@ -62,6 +66,7 @@
 
     .product_DescriptionPort .Model {
         display: block;
+        text-shadow: 0 0 1px rgb(226, 217, 24);
     }
 
     .product_DescriptionPort .Image {
@@ -83,6 +88,7 @@
 
     .product_DescriptionPort .Price {
         display: block;
+        text-shadow: 0 0 1px rgb(225, 17, 195);
     }
 
     .product_DescriptionPort .Offer {
@@ -96,10 +102,12 @@
 
     .product_DescriptionPort .Color {
         display: block;
+        text-shadow: 0 0 1px rgb(18, 235, 231);
     }
 
     .product_DescriptionPort .Specification {
         display: block;
+        text-shadow: 0 0 1px rgb(230, 20, 78);
     }
 
         .product_DescriptionPort .Specification ul {
@@ -118,6 +126,7 @@
 
     .product_DescriptionPort .Description {
         display: block;
+        text-shadow: 0 0 1px rgb(195, 79, 234);
     }
 
 .Overlap {
