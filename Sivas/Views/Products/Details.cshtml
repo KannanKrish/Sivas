@@ -14,7 +14,7 @@
             @{
                 var message = Model.Category + " " + Model.Model;
             }
-            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image"/>
+            <img @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" />
         </div>
         <div @(Model.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
             <span class="Category">@Html.DisplayFor(model => model.Category)</span>
