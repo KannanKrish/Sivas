@@ -15,7 +15,7 @@
     }
 </script>
 
-<div class="ProductContainer">
+<div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
     @foreach (var item in Model)
     {
         <div class="product" @("onclick=GoToRoom('" + item.Category + "')")>
@@ -24,11 +24,12 @@
                 @{
                     var message = item.Category + " " + item.Model;
                 }
-                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
+                <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" />
             </div>
             <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
                 @* <span class="product_Title">@item.Category </span>*@
-                <span class="Company">@item.Company  @item.Brand </span>
+                <span class="Company" itemprop="name">@item.Company  @item.Model </span>
+                <span class="Brand">@item.Brand</span>
                 <span class="EneryStar">
                     @{
                         if (item.Landscape)
@@ -113,9 +114,9 @@
                     }
                     @Html.Raw(Server.HtmlDecode(item.Specification))
                 </span>
-                <span class="Description">@Html.DisplayFor(model => item.Description)</span>
+                <span class="Description" itemprop="description">@Html.DisplayFor(model => item.Description)</span>
             </div>
-            <div @(item.Landscape == true ? "class=PriceHolderLand" : "class=PriceHolderPort")><span class="Text">@item.Price</span></div>
+            <div @(item.Landscape == true ? "class=PriceHolderLand" : "class=PriceHolderPort") itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="Text" itemprop="price">@item.Price</span></div>
         </div>
                         }
 </div>

@@ -8,19 +8,19 @@
     <link href="~/Content/customLand.css" rel="stylesheet" />
     <link href="~/Content/customPort.css" rel="stylesheet" />
 }
-<div class="ProductContainer">
+<div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
     <div class="product">
         <div @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
             @{
                 var message = Model.Category + " " + Model.Model;
             }
-            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" />
+            <img src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image"/>
         </div>
         <div @(Model.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
             <span class="Category">@Html.DisplayFor(model => model.Category)</span>
             <span class="Company">@Html.DisplayFor(model => model.Company)</span>
+            <span class="Model" itemprop="name">@Html.DisplayFor(model => model.Model)</span>
             <span class="Brand">@Html.DisplayFor(model => model.Brand)</span>
-            <span class="Model">@Html.DisplayFor(model => model.Model)</span>
             @*<span class="Image">@Html.DisplayFor(model => model.Image)</span>*@
             @*<span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>*@
             <span class="EneryStar">
@@ -47,7 +47,9 @@
                     }
                 }
             </span>
-            <span class="Price">@Html.DisplayFor(model => model.Price)</span>
+            <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                <span class="Price" itemprop="offers">@Html.DisplayFor(model => model.Price)</span>
+            </span>
             @{
                 if (Model.Offer)
                 {
@@ -82,7 +84,7 @@
                 }
                 @Html.Raw(Server.HtmlDecode(Model.Specification))
             </span>
-            <span class="Description">@Html.DisplayFor(model => model.Description)</span>
+            <span class="Description" itemprop="description">@Html.DisplayFor(model => model.Description)</span>
         </div>
     </div>
 </div>
