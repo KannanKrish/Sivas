@@ -1,11 +1,8 @@
 namespace Sivas.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Sivas.Models.SivasContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Models.SivasContext>
     {
         public Configuration()
         {
@@ -13,7 +10,7 @@ namespace Sivas.Migrations
             ContextKey = "Sivas.Models.SivasContext";
         }
 
-        protected override void Seed(Sivas.Models.SivasContext context)
+        protected override void Seed(Models.SivasContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 
 namespace Sivas.Models
 {
@@ -19,6 +15,6 @@ namespace Sivas.Models
         {
         }
 
-        public System.Data.Entity.DbSet<Sivas.Models.Products> Products { get; set; }
+        public DbSet<Products> Products { get; set; }
     }
 }
