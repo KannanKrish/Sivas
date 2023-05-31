@@ -1,8 +1,7 @@
 namespace Sivas.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddCompanyPriceOfferDescriptionToProducts : DbMigration
     {
         public override void Up()

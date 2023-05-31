@@ -1,29 +1,26 @@
-namespace Sivas.Migrations
+namespace Sivas.Migrations;
+
+internal sealed class Configuration : DbMigrationsConfiguration<SivasContext>
 {
-    using System.Data.Entity.Migrations;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<Models.SivasContext>
+    public Configuration()
     {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "Sivas.Models.SivasContext";
-        }
+        AutomaticMigrationsEnabled = false;
+        ContextKey = "Sivas.Models.SivasContext";
+    }
 
-        protected override void Seed(Models.SivasContext context)
-        {
-            //  This method will be called after migrating to the latest version.
+    protected override void Seed(SivasContext context)
+    {
+        //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
-        }
+        //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+        //  to avoid creating duplicate seed data. E.g.
+        //
+        //    context.People.AddOrUpdate(
+        //      p => p.FullName,
+        //      new Person { FullName = "Andrew Peters" },
+        //      new Person { FullName = "Brice Lambson" },
+        //      new Person { FullName = "Rowan Miller" }
+        //    );
+        //
     }
 }

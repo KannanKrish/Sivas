@@ -1,7 +1,10 @@
-﻿@model IEnumerable<Sivas.Models.Products>
+﻿@using Sivas.Extension
+@model IEnumerable<Sivas.Models.Products>
 
 @{
     ViewBag.Title = "Home Page";
+    const string imageRoot = "~/image";
+    const string imageExtension = ".png";
 }
 
 @section styles{
@@ -11,90 +14,46 @@
 
 <script type="text/javascript">
     function GoToRoom(category) {
-        window.location = '@Html.Raw(@Url.Action("Category", "Products"))' + '?category=' + category;
+        window.location = '@Html.Raw(Url.Action("Category", "Products"))' + '?category=' + category;
     }
 </script>
 
 <div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
     @foreach (var item in Model)
     {
+        var imageFolder = item.Landscape switch
+        {
+            true => "EnergyStarLand",
+            false => "EnergyStarPort"
+        };
+
         <div class="product" @("onclick=GoToRoom('" + item.Category + "')")>
             <div class="Overlap"><span class="Text">See More</span></div>
-            <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
+            <div @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort")>
                 @{
                     var message = item.Category + " " + item.Model;
                 }
-                <img @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" />
+                <img @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@($"data:image/gif;base64,{Convert.ToBase64String(item.Image)}")" />
             </div>
-            <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
+            <div @(item.Landscape ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
                 @* <span class="product_Title">@item.Category </span>*@
                 <span class="Company" itemprop="name">@item.Company  @item.Model </span>
                 <span class="Brand">@item.Brand</span>
                 <span class="EneryStar">
                     @{
-                        if (item.Landscape)
+                        var productStar = item.EnergyStar.GetEnergyStar();
+                        if (productStar != "")
                         {
-                            if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
-                            {
-                                <img src="~/image/EnergyStarLand/FiveStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
-                            {
-                                <img src="~/image/EnergyStarLand/FourStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
-                            {
-                                <img src="~/image/EnergyStarLand/ThreeStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
-                            {
-                                <img src="~/image/EnergyStarLand/TwoStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
-                            {
-                                <img src="~/image/EnergyStarLand/OneStar.png" />
-                            }
-                        }
-                        else
-                        {
-                            if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
-                            {
-                                <img src="~/image/EnergyStarPort/FiveStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
-                            {
-                                <img src="~/image/EnergyStarPort/FourStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
-                            {
-                                <img src="~/image/EnergyStarPort/ThreeStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
-                            {
-                                <img src="~/image/EnergyStarPort/TwoStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
-                            {
-                                <img src="~/image/EnergyStarPort/OneStar.png" />
-                            }
+                            <img src="@($"{imageRoot}/{imageFolder}/{productStar}{imageExtension}")" alt="" />
                         }
                     }
                 </span>
                 @{
                     if (item.Offer)
                     {
-                        if (item.Landscape)
-                        {
-                            <span class="Offer">
-                                <img src="~/image/EnergyStarLand/Offer.png" />
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="Offer">
-                                <img src="~/image/EnergyStarPort/Offer.png" />
-                            </span>
-                        }
+                        <span class="Offer">
+                            <img src="@($"{imageRoot}/{imageFolder}/Offer.png")" alt="" />
+                        </span>
                     }
                 }
                 <span class="Color">@Html.DisplayFor(model => item.Color)</span>
@@ -116,7 +75,7 @@
                 </span>
                 <span class="Description" itemprop="description">@Html.DisplayFor(model => item.Description)</span>
             </div>
-            <div @(item.Landscape == true ? "class=PriceHolderLand" : "class=PriceHolderPort") itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="Text" itemprop="price">@item.Price</span></div>
+            <div @(item.Landscape ? "class=PriceHolderLand" : "class=PriceHolderPort") itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="Text" itemprop="price">@item.Price</span></div>
         </div>
-                        }
+    }
 </div>
