@@ -16,13 +16,14 @@ public class Products
     public string Specification { get; set; }
     public string Description { get; set; }
 }
+
 public enum ProductCategory
 {
     TV,
     Refrigerator,
     AC,
     Cooler,
-    Woodern,
+    Wooden,
     WoodenFurniture,
     WoodenCot,
     WoodenKitchenSet,
@@ -32,6 +33,7 @@ public enum ProductCategory
     Sofa,
     SmallAppliances
 }
+
 public enum ProductEnergyStar
 {
     None,
