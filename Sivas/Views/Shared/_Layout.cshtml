@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,41 +6,44 @@
     <meta name="Description" content="The wholesaler of home appliances">
     <meta name="Keywords" content="sivas,tirunelveli wholesales, tirunelveli home appliances, sivas wholesale, sivas wholesalers, wholesalers, sivas home appliances, very low price, cheap offer, 2500, smart offer, easy buy, quick buy, wholesales, wholesale, himalaya computer technology, home, appliances,appliance, fridge, ac, wachine machine, home product,home products, kannan, kannan c,sivas home appliances">
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @RenderSection("styles", false)
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - Sivas</title>
+
+    <link rel="stylesheet" href='~/_content/Brushtail.AspNetCore.UI/lib/bootstrap/css/bootstrap.min.css' />
+    <link rel="stylesheet" href="~/css/Site.css" />
+    <link rel="stylesheet" href="~/css/customLand.css" />
+    <link rel="stylesheet" href="~/css/customPort.css" />
+
+    @await RenderSectionAsync("styles", false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #FFFFFF;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="~/">
+                    <img src="~/image/Logo_English.jpg" alt="Logo" width="50" height="50" class="d-inline-block align-text-center">Sivas
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.ActionLink("SivaS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        @Html.ActionLink("Products", "Index", "Products", htmlAttributes: new { @class = "nav-link" })
+                        @Html.ActionLink("About", "About", "Home", htmlAttributes: new { @class = "nav-link" })
+                        @Html.ActionLink("Contact", "Contact", "Home", htmlAttributes: new { @class = "nav-link" })
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr style="clear:left" />
-        <footer style="text-align:center;background-color:rgba(0,0,0,0.2);position:fixed;bottom:0px;width:85%;z-index:10;">
-            <p>&copy; @DateTime.Now.Year - Designed by <a href="http://himalayatechnology.in" target="_blank">Himalaya Computer Technology </a> </p>
-        </footer>
-    </div>
+        </nav>
+    </header>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <main class="container-fluid">
+        @RenderBody()
+    </main>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Designed by <a href="https://brushtailtech.com" target="_blank">Brushtail Technology Private Limited</a> </p>
+    </footer>
+
+    @await RenderSectionAsync("scripts", required: false)
 </body>
 </html>

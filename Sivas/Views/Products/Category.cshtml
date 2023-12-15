@@ -1,17 +1,10 @@
-﻿@using PagedList.Mvc
-@using Sivas.Extension
-@model PagedList.IPagedList<Sivas.Models.Products>
-
+﻿@model IPagedList<Product>
 @{
     ViewBag.Title = "Category";
     const string imageRoot = "~/image";
     const string imageExtension = ".png";
 }
 
-@section styles{
-    <link href="~/Content/customLand.css" rel="stylesheet" />
-    <link href="~/Content/customPort.css" rel="stylesheet" />
-}
 <script type="text/javascript">
     function GoToRoom(id) {
         window.location = '@Html.Raw(@Url.Action("Details", "Products"))' + '?id=' + id;
@@ -79,11 +72,12 @@
                         displaySpecification += "</li></ul>";
                         item.Specification = displaySpecification;
                     }
-                    @Html.Raw(Server.HtmlDecode(item.Specification))
+                    @Html.HtmlRaw(item.Specification)
                 </span>
                 <span class="Description" itemprop="description">@Html.DisplayFor(model => item.Description)</span>
             </div>
         </div>
     }
 </div>
-@Html.PagedListPager(Model, page => Url.Action("Category", new { page, category = Request.QueryString["category"] }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+
+@Html.PagedListPager(Model, page => Url.Action("Category", new { page, category = Context.Request.Query["category"] }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })

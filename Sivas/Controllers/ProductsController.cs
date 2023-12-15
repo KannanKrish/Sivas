@@ -2,58 +2,36 @@
 
 public class ProductsController : Controller
 {
-    private readonly SivasContext db = new();
-
     // GET: Products
-    public ActionResult Index()
-    {
-        var items = new List<Products>();
-        foreach (ProductCategory item in Enum.GetValues(typeof(ProductCategory)))
-        {
-            try
-            {
-                items.Add(db.Products.First(x => x.Category == item && x.Offer == true));
-            }
-            catch (InvalidOperationException) { }
-        }
-        return View(items.AsEnumerable());
-    }
+    public ActionResult Index() => View(UnitOfWork.Product.GetAll(s => s.Offer)
+        .OrderBy(s => s.Category).ToList());
 
     // GET: Products
     public ActionResult Category(ProductCategory? category, int? page)
     {
-        var items = new List<Products>();
         if (category != null)
-        {
-            items.AddRange(db.Products.Where(x => x.Category == category && x.Offer == true));
-            items.AddRange(db.Products.Where(x => x.Category == category && x.Offer == false));
-            return View(items.ToPagedList(page ?? 1, 6));
-        }
-        else
-        {
-            items.AddRange(db.Products.Where(x => x.Offer == true));
-            items.AddRange(db.Products.Where(x => x.Offer == false));
-            return View(items.ToPagedList(page ?? 1, 6));
-        }
+            return View(UnitOfWork.Product.GetAll(x => x.Category == category).ToPagedList());
+
+        return View(UnitOfWork.Product
+            .GetPagedResult(page ?? 1, 6).Results
+            .ToPagedList());
     }
 
     // GET: Products/Details/5
-    public ActionResult Details(int? id)
+    public ActionResult Details(Guid? id)
     {
         if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        var products = db.Products.Find(id);
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
+
         if (products == null)
-        {
-            return HttpNotFound();
-        }
+            return NotFound();
+
         return View(products);
     }
 
     [Authorize]
-
     // GET: Products/Create
     public ActionResult Create()
     {
@@ -61,96 +39,95 @@ public class ProductsController : Controller
     }
 
     // POST: Products/Create
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // To protect from over posting attacks, please enable the specific properties you want to bind to, for 
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Authorize]
-    public ActionResult Create([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
+    public async Task<ActionResult> Create([Bind("Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Product product)
     {
         if (ModelState.IsValid)
         {
-            var file = Request.Files["ImageData"];
-            products.Image = file.ConvertToBytes();
-            db.Products.Add(products);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var file = Request.Form.Files["ImageData"];
+
+            if (file != null)
+            {
+                product.Image = await file.ConvertToBytes();
+                UnitOfWork.Add(product);
+                await UnitOfWork.CompleteAsync();
+                return RedirectToAction("Index");
+            }
         }
 
-        return View(products);
+        return View(product);
     }
 
     [Authorize]
     // GET: Products/Edit/5
-    public ActionResult Edit(int? id)
+    public ActionResult Edit(Guid? id)
     {
         if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        var products = db.Products.Find(id);
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
+
         if (products == null)
-        {
-            return HttpNotFound();
-        }
+            return NotFound();
+
         return View(products);
     }
 
     // POST: Products/Edit/5
-    // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+    // To protect from over posting attacks, please enable the specific properties you want to bind to, for 
     // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
     [Authorize]
-    public ActionResult Edit([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
+    public async Task<ActionResult> Edit([Bind("Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Product product)
     {
         if (ModelState.IsValid)
         {
-            var file = Request.Files["ImageData"];
-            products.Image = file.ConvertToBytes();
-            db.Entry(products).State = EntityState.Modified;
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            var file = Request.Form.Files["ImageData"];
+
+            if (file != null)
+            {
+                product.Image = await file.ConvertToBytes();
+
+                UnitOfWork.Update(product);
+                await UnitOfWork.CompleteAsync();
+
+                return RedirectToAction("Index");
+            }
         }
-        return View(products);
+        return View(product);
     }
 
     // GET: Products/Delete/5
     [Authorize]
-    public ActionResult Delete(int? id)
+    public ActionResult Delete(Guid? id)
     {
         if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }
-        var products = db.Products.Find(id);
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
         if (products == null)
-        {
-            return HttpNotFound();
-        }
+            return NotFound();
+
         return View(products);
     }
 
     // POST: Products/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public ActionResult DeleteConfirmed(int id)
+    public ActionResult DeleteConfirmed(Guid id)
     {
-        var products = db.Products.Find(id);
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
 
         if (products == null) return RedirectToAction("Index");
 
-        db.Products.Remove(products);
-        db.SaveChanges();
-        return RedirectToAction("Index");
-    }
+        UnitOfWork.Remove(products);
+        UnitOfWork.CompleteAsync();
 
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            db.Dispose();
-        }
-        base.Dispose(disposing);
+        return RedirectToAction("Index");
     }
 }

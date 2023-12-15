@@ -1,0 +1,38 @@
+﻿@page "/NotFound"
+@page "/NotFound.html"
+@page "/StatusCode/{responseCode}"
+
+@inject NavigationManager NavigationManager
+
+@if (ResponseCode.IsNullOrEmpty())
+{
+    <Title>Not Found</Title>
+
+    <HeadContent>
+        <meta name="robots" content="noindex" />
+    </HeadContent>
+
+    <SinglePage Id="notFound"
+                Title="Page Not Found"
+                Content="What you are looking at this page? it maybe not present or you don't have the access."
+                Icon="@FontAwesome.House"
+                Size="3rem"
+                Click="@(() => NavigationManager.NavigateTo("/"))" />
+}
+else
+{
+    <Title>Error</Title>
+
+    <SinglePage Id="Error"
+                Title="@($"Error Code: {ResponseCode}")"
+                Content="What you are looking at this page? it maybe not present or you don't have the access."
+                Icon="@FontAwesome.House"
+                Size="3rem"
+                Click="@(() => NavigationManager.NavigateTo("/"))" />
+}
+
+@code
+{
+    [Parameter]
+    public string ResponseCode { get; set; }
+}

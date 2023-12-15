@@ -1,6 +1,4 @@
-﻿@using Sivas.Extension
-@model Sivas.Models.Products
-
+﻿@model Product
 @{
     ViewBag.Title = "Details";
     const string imageRoot = "~/image";
@@ -12,10 +10,6 @@
     };
 }
 
-@section styles{
-    <link href="~/Content/customLand.css" rel="stylesheet" />
-    <link href="~/Content/customPort.css" rel="stylesheet" />
-}
 <div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
     <div class="product">
         <div @(Model.Landscape ? "class=product_ImageLand" : "class=product_ImagePort")>
@@ -66,7 +60,7 @@
                     displaySpecification += "</li></ul>";
                     Model.Specification = displaySpecification;
                 }
-                @Html.Raw(Server.HtmlDecode(Model.Specification))
+                @Html.HtmlRaw(Model.Specification))
             </span>
             <span class="Description" itemprop="description">@Html.DisplayFor(model => model.Description)</span>
         </div>
@@ -75,7 +69,7 @@
 <div style="clear:left">
     <p>
         @{
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            if (Context.User.Identity is { IsAuthenticated: true })
             {
                 <h2>@Html.ActionLink("Edit Current Item", "Edit", new { id = Model.Id })</h2>
                 <h2>@Html.ActionLink("Delete Current Item", "Delete", new { id = Model.Id })</h2>

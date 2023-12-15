@@ -1,15 +1,8 @@
-﻿@using Sivas.Extension
-@model IEnumerable<Sivas.Models.Products>
-
+﻿@model IEnumerable<Product>
 @{
     ViewBag.Title = "Home Page";
     const string imageRoot = "~/image";
     const string imageExtension = ".png";
-}
-
-@section styles{
-    <link href="~/Content/customLand.css" rel="stylesheet" />
-    <link href="~/Content/customPort.css" rel="stylesheet" />
 }
 
 <script type="text/javascript">
@@ -18,64 +11,67 @@
     }
 </script>
 
-<div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
-    @foreach (var item in Model)
-    {
-        var imageFolder = item.Landscape switch
+@if (Model.Any())
+{
+    <div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
+        @foreach (var item in Model)
         {
-            true => "EnergyStarLand",
-            false => "EnergyStarPort"
-        };
+            var imageFolder = item.Landscape switch
+            {
+                true => "EnergyStarLand",
+                false => "EnergyStarPort"
+            };
 
-        <div class="product" @("onclick=GoToRoom('" + item.Category + "')")>
-            <div class="Overlap"><span class="Text">See More</span></div>
-            <div @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort")>
-                @{
-                    var message = item.Category + " " + item.Model;
-                }
-                <img @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@($"data:image/gif;base64,{Convert.ToBase64String(item.Image)}")" />
-            </div>
-            <div @(item.Landscape ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
-                @* <span class="product_Title">@item.Category </span>*@
-                <span class="Company" itemprop="name">@item.Company  @item.Model </span>
-                <span class="Brand">@item.Brand</span>
-                <span class="EneryStar">
+            <div class="product" @("onclick=GoToRoom('" + item.Category + "')")>
+                <div class="Overlap"><span class="Text">See More</span></div>
+                <div @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort")>
                     @{
-                        var productStar = item.EnergyStar.GetEnergyStar();
-                        if (productStar != "")
-                        {
-                            <img src="@($"{imageRoot}/{imageFolder}/{productStar}{imageExtension}")" alt="" />
+                        var message = item.Category + " " + item.Model;
+                    }
+                    <img @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@($"data:image/gif;base64,{Convert.ToBase64String(item.Image)}")" />
+                </div>
+                <div @(item.Landscape ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
+                    @* <span class="product_Title">@item.Category </span>*@
+                    <span class="Company" itemprop="name">@item.Company  @item.Model </span>
+                    <span class="Brand">@item.Brand</span>
+                    <span class="EneryStar">
+                        @{
+                            var productStar = item.EnergyStar.GetEnergyStar();
+                            if (productStar != "")
+                            {
+                                <img src="@($"{imageRoot}/{imageFolder}/{productStar}{imageExtension}")" alt="" />
+                            }
                         }
-                    }
-                </span>
-                @{
-                    if (item.Offer)
-                    {
-                        <span class="Offer">
-                            <img src="@($"{imageRoot}/{imageFolder}/Offer.png")" alt="" />
-                        </span>
-                    }
-                }
-                <span class="Color">@Html.DisplayFor(model => item.Color)</span>
-                <span class="Specification">
+                    </span>
                     @{
-                        var displaySpecification = "<ul><li>";
-                        if (item.Specification.Contains("~"))
+                        if (item.Offer)
                         {
-                            displaySpecification += item.Specification.Replace("~", "</li><li>");
+                            <span class="Offer">
+                                <img src="@($"{imageRoot}/{imageFolder}/Offer.png")" alt="" />
+                            </span>
                         }
-                        else
-                        {
-                            displaySpecification += item.Specification;
-                        }
-                        displaySpecification += "</li></ul>";
-                        item.Specification = displaySpecification;
                     }
-                    @Html.Raw(Server.HtmlDecode(item.Specification))
-                </span>
-                <span class="Description" itemprop="description">@Html.DisplayFor(model => item.Description)</span>
+                    <span class="Color">@Html.DisplayFor(model => item.Color)</span>
+                    <span class="Specification">
+                        @{
+                            var displaySpecification = "<ul><li>";
+                            if (item.Specification.Contains("~"))
+                            {
+                                displaySpecification += item.Specification.Replace("~", "</li><li>");
+                            }
+                            else
+                            {
+                                displaySpecification += item.Specification;
+                            }
+                            displaySpecification += "</li></ul>";
+                            item.Specification = displaySpecification;
+                        }
+                        @Html.HtmlRaw(item.Specification)
+                    </span>
+                    <span class="Description" itemprop="description">@Html.DisplayFor(model => item.Description)</span>
+                </div>
+                <div @(item.Landscape ? "class=PriceHolderLand" : "class=PriceHolderPort") itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="Text" itemprop="price">@item.Price</span></div>
             </div>
-            <div @(item.Landscape ? "class=PriceHolderLand" : "class=PriceHolderPort") itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span class="Text" itemprop="price">@item.Price</span></div>
-        </div>
-    }
-</div>
+        }
+    </div>
+}

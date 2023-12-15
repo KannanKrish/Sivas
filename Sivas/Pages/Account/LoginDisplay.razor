@@ -1,0 +1,12 @@
+﻿@inject IAuthService AuthService
+
+<AuthorizeView>
+    <Authorized>
+        <NavItem Title="@context.GetUserName()" Link="account/profile" />
+        <NavItem Title="Logout" Click="@AuthService.Logout" />
+    </Authorized>
+    <NotAuthorized>
+        <NavItem Title="Log in" Link="account/login" />
+        <NavItem Title="Register" Link="account/register" />
+    </NotAuthorized>
+</AuthorizeView>
