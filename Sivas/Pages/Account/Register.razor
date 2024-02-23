@@ -1,0 +1,31 @@
+﻿@page "/account/register"
+
+@layout AccountLayout
+
+<Title>Register</Title>
+
+<div class="container-fluid" id="RegisterContainer">
+    <EditForm Model="RegisterModel" OnValidSubmit="OnRegister">
+        <FluentValidationValidator />
+
+        <MudTextField @bind-Value="@RegisterModel.Username" Label="Username" Variant="InputLook" />
+        <MudTextField @bind-Value="@RegisterModel.Password" Label="Password" Variant="InputLook" InputType="@InputType.Password" />
+        <MudTextField @bind-Value="@RegisterModel.ConfirmPassword" Label="Confirm Password" Variant="InputLook" InputType="@InputType.Password" />
+
+        <ValidationSummary />
+
+        <div class="row">
+            <span class="text-danger">@RegisterModel.Message</span>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </div>
+        <div class="row">
+            <NavLink href="/" @onclick="OnBack">Back</NavLink>
+        </div>
+
+    </EditForm>
+</div>
