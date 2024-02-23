@@ -1,22 +1,24 @@
-﻿@model Sivas.Models.Products
-
+﻿@model Product
 @{
     ViewBag.Title = "Details";
+    const string imageRoot = "~/image";
+    const string imageExtension = ".png";
+    var imageFolder = Model.Landscape switch
+    {
+        true => "EnergyStarLand",
+        false => "EnergyStarPort"
+    };
 }
 
-@section styles{
-    <link href="~/Content/customLand.css" rel="stylesheet" />
-    <link href="~/Content/customPort.css" rel="stylesheet" />
-}
 <div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
     <div class="product">
-        <div @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
+        <div @(Model.Landscape ? "class=product_ImageLand" : "class=product_ImagePort")>
             @{
                 var message = Model.Category + " " + Model.Model;
             }
-            <img @(Model.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Model.Image))" />
+            <img @(Model.Landscape ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@($"data:image/gif;base64,{Convert.ToBase64String(Model.Image)}")" />
         </div>
-        <div @(Model.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
+        <div @(Model.Landscape ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
             <span class="Category">@Html.DisplayFor(model => model.Category)</span>
             <span class="Company">@Html.DisplayFor(model => model.Company)</span>
             <span class="Model" itemprop="name">@Html.DisplayFor(model => model.Model)</span>
@@ -25,25 +27,10 @@
             @*<span class="Landscape">@Html.DisplayFor(model => model.Landscape)</span>*@
             <span class="EneryStar">
                 @{
-                    if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
+                    var productStar = Model.EnergyStar.GetEnergyStar();
+                    if (productStar != "")
                     {
-                        <img src="~/image/EnergyStarLand/FiveStar.png" />
-                    }
-                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
-                    {
-                        <img src="~/image/EnergyStarLand/FourStar.png" />
-                    }
-                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
-                    {
-                        <img src="~/image/EnergyStarLand/ThreeStar.png" />
-                    }
-                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
-                    {
-                        <img src="~/image/EnergyStarLand/TwoStar.png" />
-                    }
-                    else if (Model.EnergyStar == Sivas.Models.ProductEnergyStar.One)
-                    {
-                        <img src="~/image/EnergyStarLand/OneStar.png" />
+                        <img src="@($"{imageRoot}/{imageFolder}/{productStar}{imageExtension}")" alt="" />
                     }
                 }
             </span>
@@ -53,18 +40,9 @@
             @{
                 if (Model.Offer)
                 {
-                    if (Model.Landscape)
-                    {
-                        <span class="Offer">
-                            <img src="~/image/EnergyStarLand/Offer.png" />
-                        </span>
-                    }
-                    else
-                    {
-                        <span class="Offer">
-                            <img src="~/image/EnergyStarPort/Offer.png" />
-                        </span>
-                    }
+                    <span class="Offer">
+                        <img src="@($"{imageRoot}/{imageFolder}/Offer.png")" alt="" />
+                    </span>
                 }
             }
             <span class="Color">@Html.DisplayFor(model => model.Color)</span>
@@ -82,7 +60,7 @@
                     displaySpecification += "</li></ul>";
                     Model.Specification = displaySpecification;
                 }
-                @Html.Raw(Server.HtmlDecode(Model.Specification))
+                @Html.HtmlRaw(Model.Specification))
             </span>
             <span class="Description" itemprop="description">@Html.DisplayFor(model => model.Description)</span>
         </div>
@@ -91,7 +69,7 @@
 <div style="clear:left">
     <p>
         @{
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
+            if (Context.User.Identity is { IsAuthenticated: true })
             {
                 <h2>@Html.ActionLink("Edit Current Item", "Edit", new { id = Model.Id })</h2>
                 <h2>@Html.ActionLink("Delete Current Item", "Delete", new { id = Model.Id })</h2>

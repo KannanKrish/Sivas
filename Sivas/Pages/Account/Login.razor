@@ -1,0 +1,36 @@
+﻿@page "/account/login"
+
+@layout AccountLayout
+
+<Title>Login</Title>
+
+@*<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#FF0066" d="M68.1,-27.3C81.9,-15.5,82.1,16,68.5,29.8C54.9,43.7,27.5,39.8,1,39.2C-25.4,38.6,-50.8,41.3,-59.1,30.5C-67.4,19.8,-58.5,-4.5,-45.8,-15.6C-33.1,-26.7,-16.6,-24.8,5.3,-27.8C27.2,-30.9,54.4,-39,68.1,-27.3Z" transform="translate(100 100)" />
+</svg>*@
+
+<div class="container-fluid" id="LoginContainer">
+    <EditForm EditContext="editContext" OnValidSubmit="@OnLogin">
+        <FluentValidationValidator />
+
+        <MudTextField @bind-Value="@Model.Username" Label="Username" Variant="InputLook" />
+        <MudTextField @bind-Value="@Model.Password" Label="Password" Variant="InputLook" InputType="@InputType.Password" />
+
+        <ValidationSummary />
+
+        @if (Error.IsNotNullOrEmpty())
+        {
+            <div class="row">
+                <span class="text-danger">@Error</span>
+            </div>
+        }
+
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+
+        <NavLink href="/account/register">Register Account</NavLink>
+        <NavLink href="/account/forgotPassword">Forgot Password</NavLink>
+    </EditForm>
+</div>

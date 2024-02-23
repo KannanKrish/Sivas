@@ -1,0 +1,123 @@
+﻿@import "../../wwwroot/scss/_colors.scss";
+@import "../../wwwroot/scss/_variables.scss";
+@import "../../wwwroot/scss/_animations.scss";
+@import "../../wwwroot/scss/_mixins.scss";
+
+nav {
+    height: $navbarHeight;
+    background-color: $secondary-color !important;
+}
+
+.navbar-brand {
+    display: table !important;
+
+    img {
+        height: 55px;
+        object-fit: cover;
+        position: relative;
+        top: -7px;
+        left: 7px;
+    }
+
+    span {
+        position: relative;
+        font-size: 30px;
+        color: $primary-color;
+        font-family: 'Oleo Script', cursive;
+        font-weight: 700;
+        font-style: normal;
+        vertical-align: middle;
+    }
+}
+
+
+.login {
+    background-color: $primary-color;
+    border-radius: 5px;
+    color: $white-color;
+}
+
+::deep .nav-item {
+    .nav-link {
+        color: rgba($white-color, 0.4) !important;
+        transition: color ease-in 0.1s;
+
+        &.active {
+            color: rgba($white-color, 0.8) !important;
+            background: none !important;
+            position: relative;
+            opacity: 1;
+            font-weight: bolder;
+
+            &:after {
+                @include centerHPosition;
+                height: 5px;
+                content: "";
+                top: calc(100% + 10px);
+                width: 100%;
+                opacity: 0.6;
+                background-color: $primary-color;
+                display: inline-block;
+                border-radius: 5px 5px 0 0;
+                animation: widthGrow 0.5s ease-in;
+            }
+        }
+
+        &:hover:not(&.active) {
+            color: rgba($white-color, 0.6) !important;
+        }
+    }
+}
+
+.cart {
+
+    .badge {
+        opacity: 1;
+        content: '';
+        position: relative;
+        left: 15px;
+        top: 10px;
+        margin-bottom: -15px;
+        width: 15px;
+        height: 15px;
+        border-radius: 7.5px;
+        background-color: red;
+        z-index: 1;
+
+        .count {
+            @include centerHPosition;
+            color: white;
+            font-size: 0.6rem;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #navcol-1 {
+        text-align: center;
+        background-color: $secondary-color;
+        position: absolute;
+        top: $navbarHeight;
+        left: 0;
+        width: 100%;
+
+        .navbar-nav {
+            padding: 0 0px;
+
+            ::deep .nav-item {
+                margin: 0 auto;
+
+                .nav-link {
+                    &.active {
+                        &::after {
+                            width: 80vw;
+                            height: 4px;
+                            bottom: 0px;
+                            border-radius: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

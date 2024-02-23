@@ -2,86 +2,113 @@
     ViewBag.Title = "Index";
 }
 
-@section styles{
-    <link href="~/Content/customProduct.css" rel="stylesheet" />
+@section styles {
+    <link href="css/customProduct.css" rel="stylesheet" />
 }
 
 @{
-    if (HttpContext.Current.User.Identity.IsAuthenticated)
+    if (Context.User.Identity is { IsAuthenticated: true })
     {
         <h2> @Html.ActionLink("Insert New Item", "Create")</h2>
     }
 }
 <script type="text/javascript">
-    function GoToRoom(category) {
+    function GoToRoom(category)
+    {
         window.location = '@Html.Raw(@Url.Action("Category", "Products"))' + '?category=' + category;
     }
 </script>
 
 <div class="ProductContainer">
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.TV + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="image/Products/TV.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Tv + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/TV.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">TV </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.Refrigerator + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/Refrigerator.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Refrigerator + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/Refrigerator.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Refrigerator </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.AC + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/AC.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Ac + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/AC.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">AC </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.Cooler + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/Cooler.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Cooler + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/Cooler.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Cooler </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.Woodern + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/Woodern.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Wooden + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/Woodern.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Woodern </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.WoodenFurniture + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/WoodenFurniture.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.WoodenFurniture + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/WoodenFurniture.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Wooden Furniture </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.WoodenCot + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/WoodenCot.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.WoodenCot + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/WoodenCot.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Wooden Cot </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.WoodenKitchenSet + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/KitchenSet.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.WoodenKitchenSet + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/KitchenSet.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Wooden Kitchen Set </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.WoodenPoojaTable + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/PoojaTable.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.WoodenPoojaTable + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/PoojaTable.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Wooden Pooja Table </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.Fan + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/Fan.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Fan + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/Fan.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Fan </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.DiningTable + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/DiningTable.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.DiningTable + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/DiningTable.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Dining Table </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.Sofa + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/Sofa.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.Sofa + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/Sofa.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Sofa </div>
     </div>
     <div class="product">
-        <div class="Overlap" @("onclick=GoToRoom('" + Sivas.Models.ProductCategory.SmallAppliances + "')")><span class="Text">Browse</span></div>
-        <div class="product_Image"> <img src="~/image/Products/SmallAppliances.png" class="product_Image" /> </div>
+        <div class="Overlap" @("onclick=GoToRoom('" + ProductCategory.SmallAppliances + "')")><span class="Text">Browse</span></div>
+        <div class="product_Image">
+            <img src="~/image/Products/SmallAppliances.png" class="product_Image" alt=""/>
+        </div>
         <div class="product_Title">Small Appliances </div>
     </div>
 </div>

@@ -1,16 +1,10 @@
-﻿@using PagedList.Mvc;
-@using PagedList;
-
-@model IPagedList<Sivas.Models.Products>
-
+﻿@model IPagedList<Product>
 @{
     ViewBag.Title = "Category";
+    const string imageRoot = "~/image";
+    const string imageExtension = ".png";
 }
 
-@section styles{
-    <link href="~/Content/customLand.css" rel="stylesheet" />
-    <link href="~/Content/customPort.css" rel="stylesheet" />
-}
 <script type="text/javascript">
     function GoToRoom(id) {
         window.location = '@Html.Raw(@Url.Action("Details", "Products"))' + '?id=' + id;
@@ -20,15 +14,21 @@
 <div class="ProductContainer" itemscope itemtype="http://schema.org/Product">
     @foreach (var item in Model)
     {
+        var imageFolder = item.Landscape switch
+        {
+            true => "EnergyStarLand",
+            false => "EnergyStarPort"
+        };
+
         <div class="product" @("onclick=GoToRoom('" + item.Id + "')")>
             <div class="Overlap"><span class="Text">More Details</span></div>
-            <div @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort")>
+            <div @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort")>
                 @{
                     var message = item.Category + " " + item.Model;
                 }
-                <img @(item.Landscape == true ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(item.Image))" />
+                <img @(item.Landscape ? "class=product_ImageLand" : "class=product_ImagePort") alt="@message" itemprop="image" src="@($"data:image/gif;base64,{Convert.ToBase64String(item.Image)}")" />
             </div>
-            <div @(item.Landscape == true ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
+            <div @(item.Landscape ? "class=product_DescriptionLand" : "class=product_DescriptionPort")>
                 @*<span class="Category">@Html.DisplayFor(model => item.Category)</span>*@
                 <span class="Company">@Html.DisplayFor(model => item.Company)</span>
                 <span class="Model" itemprop="name">@Html.DisplayFor(model => item.Model)</span>
@@ -38,51 +38,10 @@
                 @*<span class="EneryStar">@Html.DisplayFor(model => item.EnergyStar)</span>*@
                 <span class="EneryStar">
                     @{
-                        if (item.Landscape)
+                        var productStar = item.EnergyStar.GetEnergyStar();
+                        if (productStar != "")
                         {
-                            if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
-                            {
-                                <img src="~/image/EnergyStarLand/FiveStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
-                            {
-                                <img src="~/image/EnergyStarLand/FourStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
-                            {
-                                <img src="~/image/EnergyStarLand/ThreeStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
-                            {
-                                <img src="~/image/EnergyStarLand/TwoStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
-                            {
-                                <img src="~/image/EnergyStarLand/OneStar.png" />
-                            }
-                        }
-                        else
-                        {
-                            if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Five)
-                            {
-                                <img src="~/image/EnergyStarPort/FiveStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Four)
-                            {
-                                <img src="~/image/EnergyStarPort/FourStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Three)
-                            {
-                                <img src="~/image/EnergyStarPort/ThreeStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.Two)
-                            {
-                                <img src="~/image/EnergyStarPort/TwoStar.png" />
-                            }
-                            else if (item.EnergyStar == Sivas.Models.ProductEnergyStar.One)
-                            {
-                                <img src="~/image/EnergyStarPort/OneStar.png" />
-                            }
+                            <img src="@($"{imageRoot}/{imageFolder}/{productStar}{imageExtension}")" alt="" />
                         }
                     }
                 </span>
@@ -92,18 +51,9 @@
                 @{
                     if (item.Offer)
                     {
-                        if (item.Landscape)
-                        {
-                            <span class="Offer">
-                                <img src="~/image/EnergyStarLand/Offer.png" />
-                            </span>
-                        }
-                        else
-                        {
-                            <span class="Offer">
-                                <img src="~/image/EnergyStarPort/Offer.png" />
-                            </span>
-                        }
+                        <span class="Offer">
+                            <img src="@($"{imageRoot}/{imageFolder}/Offer.png")" alt="" />
+                        </span>
                     }
                 }
 
@@ -122,11 +72,12 @@
                         displaySpecification += "</li></ul>";
                         item.Specification = displaySpecification;
                     }
-                    @Html.Raw(Server.HtmlDecode(item.Specification))
+                    @Html.HtmlRaw(item.Specification)
                 </span>
                 <span class="Description" itemprop="description">@Html.DisplayFor(model => item.Description)</span>
             </div>
         </div>
-                        }
+    }
 </div>
-@Html.PagedListPager(Model, page => Url.Action("Category", new { page, category = Request.QueryString["category"] }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })
+
+@Html.PagedListPager(Model, page => Url.Action("Category", new { page, category = Context.Request.Query["category"] }), new PagedListRenderOptions { Display = PagedListDisplayMode.IfNeeded })

@@ -1,0 +1,19 @@
+﻿@import"../../wwwroot/scss/_colors.scss";
+@import"../../wwwroot/scss/_mixins.scss";
+
+.row {
+
+    .col {
+        @include centerVHFlex;
+        height: 100vh;
+
+        &:first-child {
+            background-color: $secondary-color;
+
+            img {
+                object-fit: contain;
+                height: 400px;
+            }
+        }
+    }
+}

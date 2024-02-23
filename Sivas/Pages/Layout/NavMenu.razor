@@ -1,0 +1,53 @@
+﻿@inject CartService CartService
+
+<nav class="navbar navbar-light fixed-top navbar-expand-md">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex" href="/">
+            <img src="images/Logo.svg" alt="logo image" />
+            <span>rushtail Technology</span>
+        </a>
+        <button class="navbar-toggler" data-bs-toggle="collapse"
+                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"
+                data-bs-target="#navbar">
+            <span class="visually-hidden">Toggle navigation</span>
+            <FontIcon Icon="@FontAwesome.Bars" Color="White" />
+        </button>
+
+        <div id="navbar" class="@NavMenuCssClass navbar-collapse">
+            <div class="navbar-nav me-auto">
+                <NavItem Title="Home" />
+                <NavItem Title="Shop" Link="shop" />
+                <NavItem Title="Services" Link="services" />
+                <NavItem Title="Partners" Link="partners" />
+                <NavItem Title="Blogs" Link="blogs" />
+                <NavItem Title="Buy Gifts" Link="crafts" />
+                <NavItem Title="Contact" Link="contact" />
+                <NavItem Title="Support" Link="support" />
+                <AuthorizeView Roles="@AccountType.Administrator.ToString()">
+                    <NavItem Title="Add Product" Link="newproduct" />
+                </AuthorizeView>
+                <NavItem Title="API" Link="/Docs/api/index.html" Target="TargetType.Blank" />
+            </div>
+            <div class="navbar-nav ms-auto">
+                <div class="cart">
+                    @if (CartService.TotalItems > 0)
+                    {
+                        <div class="badge">
+                            <span class="count">@CartService.TotalItems</span>
+                        </div>
+                    }
+                    <NavItem Title="Cart" Icon="@FontAwesome.CartShopping" Link="cart" />
+                </div>
+                <LoginDisplay />
+            </div>
+        </div>
+    </div>
+</nav>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu() => collapseNavMenu = !collapseNavMenu;
+}

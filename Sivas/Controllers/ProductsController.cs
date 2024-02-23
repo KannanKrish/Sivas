@@ -1,167 +1,133 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Sivas.Models;
-using Sivas.CustomMethods;
-using PagedList.Mvc;
-using PagedList;
+﻿namespace Sivas.Controllers;
 
-namespace Sivas.Controllers
+public class ProductsController : Controller
 {
-    public class ProductsController : Controller
+    // GET: Products
+    public ActionResult Index() => View(UnitOfWork.Product.GetAll(s => s.Offer)
+        .OrderBy(s => s.Category).ToList());
+
+    // GET: Products
+    public ActionResult Category(ProductCategory? category, int? page)
     {
-        private SivasContext db = new SivasContext();
+        if (category != null)
+            return View(UnitOfWork.Product.GetAll(x => x.Category == category).ToPagedList());
 
-        // GET: Products
-        public ActionResult Index()
+        return View(UnitOfWork.Product
+            .GetPagedResult(page ?? 1, 6).Results
+            .ToPagedList());
+    }
+
+    // GET: Products/Details/5
+    public ActionResult Details(Guid? id)
+    {
+        if (id == null)
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
+
+        if (products == null)
+            return NotFound();
+
+        return View(products);
+    }
+
+    [Authorize]
+    // GET: Products/Create
+    public ActionResult Create()
+    {
+        return View();
+    }
+
+    // POST: Products/Create
+    // To protect from over posting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Authorize]
+    public async Task<ActionResult> Create([Bind("Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Product product)
+    {
+        if (ModelState.IsValid)
         {
-            List<Products> items = new List<Products>();
-            foreach (ProductCategory item in Enum.GetValues(typeof(ProductCategory)))
-            {
-                try
-                {
-                    items.Add(db.Products.First(x => x.Category == item && x.Offer == true));
-                }
-                catch (InvalidOperationException) { }
-            }
-            return View(items.AsEnumerable());
-        }
+            var file = Request.Form.Files["ImageData"];
 
-        // GET: Products
-        public ActionResult Category(ProductCategory? category, int? page)
-        {
-            List<Products> items = new List<Products>();
-            if (category != null)
+            if (file != null)
             {
-                items.AddRange(db.Products.Where(x => x.Category == category && x.Offer == true));
-                items.AddRange(db.Products.Where(x => x.Category == category && x.Offer == false));
-                return View(items.ToPagedList(page ?? 1, 6));
-            }
-            else
-            {
-                items.AddRange(db.Products.Where(x => x.Offer == true));
-                items.AddRange(db.Products.Where(x => x.Offer == false));
-                return View(items.ToPagedList(page ?? 1, 6));
-            }
-        }
-
-        // GET: Products/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Products products = db.Products.Find(id);
-            if (products == null)
-            {
-                return HttpNotFound();
-            }
-            return View(products);
-        }
-
-        [Authorize]
-
-        // GET: Products/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
-        {
-            if (ModelState.IsValid)
-            {
-                HttpPostedFileBase file = Request.Files["ImageData"];
-                products.Image = ReuseCode.ConvertToBytes(file);
-                db.Products.Add(products);
-                db.SaveChanges();
+                product.Image = await file.ConvertToBytes();
+                UnitOfWork.Add(product);
+                await UnitOfWork.CompleteAsync();
                 return RedirectToAction("Index");
             }
-
-            return View(products);
         }
 
-        [Authorize]
-        // GET: Products/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Products products = db.Products.Find(id);
-            if (products == null)
-            {
-                return HttpNotFound();
-            }
-            return View(products);
-        }
+        return View(product);
+    }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Products products)
+    [Authorize]
+    // GET: Products/Edit/5
+    public ActionResult Edit(Guid? id)
+    {
+        if (id == null)
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
+
+        if (products == null)
+            return NotFound();
+
+        return View(products);
+    }
+
+    // POST: Products/Edit/5
+    // To protect from over posting attacks, please enable the specific properties you want to bind to, for 
+    // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    [Authorize]
+    public async Task<ActionResult> Edit([Bind("Id,Category,Company,Brand,Model,Image,Landscape,EnergyStar,Price,Offer,Color,Specification,Description")] Product product)
+    {
+        if (ModelState.IsValid)
         {
-            if (ModelState.IsValid)
+            var file = Request.Form.Files["ImageData"];
+
+            if (file != null)
             {
-                HttpPostedFileBase file = Request.Files["ImageData"];
-                products.Image = ReuseCode.ConvertToBytes(file);
-                db.Entry(products).State = EntityState.Modified;
-                db.SaveChanges();
+                product.Image = await file.ConvertToBytes();
+
+                UnitOfWork.Update(product);
+                await UnitOfWork.CompleteAsync();
+
                 return RedirectToAction("Index");
             }
-            return View(products);
         }
+        return View(product);
+    }
 
-        // GET: Products/Delete/5
-        [Authorize]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Products products = db.Products.Find(id);
-            if (products == null)
-            {
-                return HttpNotFound();
-            }
-            return View(products);
-        }
+    // GET: Products/Delete/5
+    [Authorize]
+    public ActionResult Delete(Guid? id)
+    {
+        if (id == null)
+            return new StatusCodeResult((int)HttpStatusCode.BadRequest);
 
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Products products = db.Products.Find(id);
-            db.Products.Remove(products);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
+        if (products == null)
+            return NotFound();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        return View(products);
+    }
+
+    // POST: Products/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public ActionResult DeleteConfirmed(Guid id)
+    {
+        var products = UnitOfWork.Product.FirstOrDefault(s => s.Id == id);
+
+        if (products == null) return RedirectToAction("Index");
+
+        UnitOfWork.Remove(products);
+        UnitOfWork.CompleteAsync();
+
+        return RedirectToAction("Index");
     }
 }

@@ -1,0 +1,45 @@
+﻿@inherits LayoutComponentBase
+
+@*@attribute [Authorize]
+
+<AuthorizeView>
+    <NotAuthorized>
+        <RedirectToLogin />
+    </NotAuthorized>
+    <Authorized>
+        <NavMenu />
+
+        <Brands />
+
+        <main>
+            @Body
+        </main>
+
+        <footer>
+            Copyright &#169; Brushtail Technology Private Limited
+        </footer>
+    </Authorized>
+</AuthorizeView>*@
+
+<NavMenu />
+
+<Brands />
+
+<main>
+    @Body
+</main>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">🗙</a>
+</div>
+
+<footer>
+    Copyright &#169; Brushtail Technology Private Limited
+    <div>
+        <NavLink href="/termscondition">Terms & Condition</NavLink>
+        <NavLink href="/privacypolicy">Privacy Policy</NavLink>
+        <NavLink href="/refundpolicy">Return & Refund Policy</NavLink>
+    </div>
+</footer>
